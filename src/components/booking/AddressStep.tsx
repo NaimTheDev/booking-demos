@@ -66,7 +66,7 @@ export function AddressStep({ client, address, onAddressChange, status }: Addres
       </AnimatePresence>
 
       <div className="flex flex-col gap-2">
-        <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-muted">
+        <p className="brand-label flex items-center gap-1.5 text-xs">
           <Truck className="size-3.5" aria-hidden="true" /> Free service zones
         </p>
         <div className="flex flex-wrap gap-2">

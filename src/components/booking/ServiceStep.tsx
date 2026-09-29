@@ -137,7 +137,7 @@ export function ServiceStep({
 
 function SectionHeading({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
-    <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
+    <h3 className="brand-label flex items-center gap-2 text-xs sm:text-[13px]">
       <span className="text-[var(--brand-accent)]">{icon}</span>
       {children}
     </h3>
@@ -168,10 +168,10 @@ function ServiceCard({ service, tier, isSelected, onSelect }: ServiceCardProps) 
     >
       <Card
         className={cn(
-          'h-full border-2 transition-colors',
+          'h-full border transition-colors',
           isSelected
-            ? 'border-[var(--brand-primary)] bg-accent-soft'
-            : 'border-border/60 hover:border-border',
+            ? 'border-[var(--brand-primary)] bg-accent-soft shadow-[inset_0_0_0_1px_var(--brand-primary)]'
+            : 'border-border hover:border-[color-mix(in_oklab,var(--brand-border)_60%,var(--brand-text))]',
         )}
       >
         <Card.Header className="flex-row items-start justify-between gap-3">
@@ -199,11 +199,11 @@ function ServiceCard({ service, tier, isSelected, onSelect }: ServiceCardProps) 
         <Card.Footer className="flex items-center justify-between gap-2">
           <span className="flex flex-col">
             {price === null ? (
-              <span className="text-lg font-bold tracking-tight">Custom quote</span>
+              <span className="brand-heading text-lg">Custom quote</span>
             ) : (
               <span className="flex items-baseline gap-1">
                 {service.startingAt && <span className="text-xs font-medium text-muted">from</span>}
-                <span className="text-2xl font-bold tracking-tight">{formatCurrency(price)}</span>
+                <span className="brand-heading text-2xl">{formatCurrency(price)}</span>
               </span>
             )}
             {isPerFoot && (
@@ -234,8 +234,8 @@ function AddonRow({ addon, isSelected, onChange }: AddonRowProps) {
       isSelected={isSelected}
       onChange={onChange}
       className={cn(
-        'w-full rounded-2xl border-2 p-3 transition-colors',
-        isSelected ? 'border-[var(--brand-primary)] bg-accent-soft' : 'border-transparent bg-surface-secondary',
+        'w-full rounded-2xl border p-3 transition-colors',
+        isSelected ? 'border-[var(--brand-primary)] bg-accent-soft' : 'border-border bg-surface-secondary',
       )}
     >
       <Checkbox.Content className="w-full">

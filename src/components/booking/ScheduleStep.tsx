@@ -32,7 +32,7 @@ export function ScheduleStep({
   return (
     <div className="flex flex-col gap-5">
       <div className="flex items-center justify-between gap-3">
-        <h3 className="flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-muted">
+        <h3 className="brand-label flex items-center gap-2 text-xs sm:text-[13px]">
           <Calendar className="size-4 text-[var(--brand-accent)]" aria-hidden="true" />
           Pick a day
         </h3>
@@ -53,22 +53,22 @@ export function ScheduleStep({
               aria-checked={isSelected}
               onClick={() => onSelectDay(day.key)}
               className={cn(
-                'relative flex flex-col items-center rounded-2xl border-2 px-2 py-3 outline-none transition-colors',
+                'relative flex flex-col items-center rounded-2xl border px-2 py-3 outline-none transition-colors',
                 'focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)]',
                 isSelected
-                  ? 'border-[var(--brand-primary)] text-[var(--brand-primary)]'
-                  : 'border-transparent bg-surface-secondary hover:border-border',
+                  ? 'border-[var(--brand-primary)] text-[var(--brand-primary)] shadow-[inset_0_0_0_1px_var(--brand-primary)]'
+                  : 'border-border bg-surface-secondary hover:border-[var(--brand-primary)]',
               )}
             >
               {isSelected && (
                 <motion.span
                   layoutId="day-highlight"
-                  className="absolute inset-0 rounded-[14px] bg-accent-soft"
+                  className="absolute inset-0 rounded-2xl bg-accent-soft"
                   transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
-              <span className="relative text-xs font-semibold uppercase">{day.weekday}</span>
-              <span className="relative text-lg font-bold">{day.label}</span>
+              <span className="brand-label relative text-[11px]" style={{ color: 'inherit' }}>{day.weekday}</span>
+              <span className="brand-heading relative text-lg" style={{ color: 'inherit' }}>{day.label}</span>
             </button>
           )
         })}
@@ -113,12 +113,12 @@ function SlotButton({ slot, index, blockHours, isSelected, onSelect }: SlotButto
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.04 }}
       className={cn(
-        'flex items-center justify-between gap-3 rounded-2xl border-2 p-4 text-left outline-none transition-colors',
+        'flex items-center justify-between gap-3 rounded-2xl border p-4 text-left outline-none transition-colors',
         'focus-visible:ring-2 focus-visible:ring-[var(--brand-accent)]',
         !isOpen && 'cursor-not-allowed opacity-50',
         isSelected
-          ? 'border-[var(--brand-primary)] bg-accent-soft'
-          : 'border-transparent bg-surface-secondary enabled:hover:border-border',
+          ? 'border-[var(--brand-primary)] bg-accent-soft shadow-[inset_0_0_0_1px_var(--brand-primary)]'
+          : 'border-border bg-surface-secondary enabled:hover:border-[var(--brand-primary)]',
       )}
     >
       <div className="flex flex-col gap-1">

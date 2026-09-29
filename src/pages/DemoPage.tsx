@@ -4,16 +4,18 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { BookingDemo } from '../components/BookingDemo'
 import { getClientBySlug } from '../data/clients'
+import { themes } from '../data/themes'
 
 export function DemoPage() {
   const { clientSlug } = useParams<{ clientSlug: string }>()
   const client = getClientBySlug(clientSlug)
+  const theme = client ? themes[client.slug] : undefined
 
   useEffect(() => {
     document.title = client ? `Book with ${client.name}` : 'Demo not found'
   }, [client])
 
-  if (!client) {
+  if (!client || !theme) {
     return (
       <div className="mx-auto flex min-h-dvh max-w-md items-center px-4">
         <Card className="w-full items-center p-8 text-center">
@@ -30,15 +32,16 @@ export function DemoPage() {
 
   return (
     <div className="min-h-dvh">
-      <Link
-        to="/"
-        className="fixed left-3 top-3 z-30 flex items-center gap-1.5 rounded-full bg-black/40 px-3 py-1.5 text-xs font-medium text-white backdrop-blur-md transition-colors hover:bg-black/60"
-      >
-        <ArrowLeft className="size-3.5" aria-hidden="true" />
-        All demos
-      </Link>
+      {/* Demo chrome stays outside the client's branding so their header reads untouched. */}
+      <div className="flex items-center justify-between gap-3 bg-neutral-950 px-3 py-1.5 text-[11px] text-neutral-400">
+        <Link to="/" className="flex items-center gap-1.5 font-medium text-neutral-200 hover:text-white">
+          <ArrowLeft className="size-3.5" aria-hidden="true" />
+          All demos
+        </Link>
+        <span className="truncate">Booking demo preview · {client.name}</span>
+      </div>
       {/* key resets widget state when navigating between clients. */}
-      <BookingDemo key={client.slug} client={client} />
+      <BookingDemo key={client.slug} client={client} theme={theme} />
     </div>
   )
 }

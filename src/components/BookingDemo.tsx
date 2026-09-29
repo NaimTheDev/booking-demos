@@ -1,6 +1,4 @@
-import { Card } from '@heroui/react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { MapPin } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import type { ClientConfig, ServiceCategory } from '../data/clients'
 import {
@@ -14,16 +12,17 @@ import {
   validateAddress,
   type TimeSlot,
 } from '../lib/booking'
-import { brandStyle } from '../lib/brand'
+import type { ClientTheme } from '../data/themes'
+import { brandStyle, useThemeFonts } from '../lib/brand'
+import { cn } from '../lib/cn'
 import { AddressStep } from './booking/AddressStep'
-import { ClientLogo } from './ClientLogo'
+import { BrandHero } from './BrandHero'
 import { ConfirmationModal } from './booking/ConfirmationModal'
 import { ConfirmStep, type BookingSummary, type ContactInfo } from './booking/ConfirmStep'
 import { ScheduleStep } from './booking/ScheduleStep'
 import { ServiceStep } from './booking/ServiceStep'
 import { StepIndicator } from './booking/StepIndicator'
 import { SummaryBar } from './booking/SummaryBar'
-import { VerticalIcon } from './VerticalIcon'
 
 const STEPS = [
   { label: 'Service', title: 'Build your service', subtitle: 'Pick a package and any add-ons.' },
@@ -37,9 +36,11 @@ const EMPTY_CONTACT: ContactInfo = { name: '', phone: '', email: '' }
 
 interface BookingDemoProps {
   client: ClientConfig
+  theme: ClientTheme
 }
 
-export function BookingDemo({ client }: BookingDemoProps) {
+export function BookingDemo({ client, theme }: BookingDemoProps) {
+  useThemeFonts(theme)
   const categories = getCategories(client)
   const days = useMemo(() => getUpcomingDays(3), [])
 
@@ -141,32 +142,23 @@ export function BookingDemo({ client }: BookingDemoProps) {
   const isLastStep = step === STEPS.length - 1
 
   return (
-    <div className="brand-scope" style={brandStyle(client)}>
+    <div className="brand-scope min-h-dvh" style={{ ...brandStyle(theme), background: theme.colors.page }}>
+      <BrandHero client={client} theme={theme} />
+
       <div
-        className="relative overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg, ${client.primaryColor} 0%, color-mix(in oklab, ${client.primaryColor} 70%, ${client.accentColor}) 100%)`,
-        }}
+        id="booking"
+        className={cn(
+          'relative mx-auto max-w-4xl pb-10 sm:px-6',
+          theme.hero.layout === 'panel' ? 'px-0' : 'px-4 pt-6 sm:pt-10',
+          theme.hero.overlap && '-mt-16 pt-0 sm:-mt-20 sm:pt-0',
+        )}
       >
         <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-20 size-72 rounded-full opacity-40 blur-3xl"
-          style={{ background: client.accentColor }}
-        />
-        <div className="relative mx-auto flex max-w-4xl flex-col gap-3 px-4 pb-16 pt-14 text-white sm:px-6 sm:pt-12">
-          <ClientLogo client={client} className="mb-2 self-start" />
-          <div className="flex items-center gap-1.5 text-sm/none font-medium text-white/80">
-            <VerticalIcon vertical={client.vertical} className="size-4" />
-            <MapPin className="ml-1 size-3.5" aria-hidden="true" />
-            {client.location}
-          </div>
-          <h1 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{client.name}</h1>
-          <p className="max-w-xl text-white/80">{client.tagline}</p>
-        </div>
-      </div>
-
-      <div className="relative mx-auto -mt-10 max-w-4xl px-4 pb-4 sm:px-6">
-        <Card className="overflow-visible rounded-3xl p-4 shadow-xl sm:p-6">
+          className={cn(
+            'brand-panel p-4 sm:p-6',
+            theme.hero.layout === 'panel' && 'border-0 border-t sm:px-10',
+          )}
+        >
           <StepIndicator
             steps={STEPS.map((s) => s.label)}
             current={step}
@@ -175,8 +167,8 @@ export function BookingDemo({ client }: BookingDemoProps) {
           />
 
           <div className="mt-6 mb-5">
-            <h2 className="text-xl font-bold tracking-tight sm:text-2xl">{current.title}</h2>
-            <p className="text-sm text-muted">{current.subtitle}</p>
+            <h2 className="brand-heading text-xl sm:text-2xl">{current.title}</h2>
+            <p className="mt-1 text-sm text-muted">{current.subtitle}</p>
           </div>
 
           <AnimatePresence mode="wait" initial={false} custom={direction}>
@@ -247,7 +239,7 @@ export function BookingDemo({ client }: BookingDemoProps) {
             canContinue={canContinue}
             continueLabel="Continue"
           />
-        </Card>
+        </div>
       </div>
 
       {confirmed && (
@@ -259,7 +251,7 @@ export function BookingDemo({ client }: BookingDemoProps) {
           customerName={confirmed.contact.name}
           customerPhone={confirmed.contact.phone}
           summary={confirmed.summary}
-          brandStyle={brandStyle(client)}
+          brandStyle={brandStyle(theme)}
         />
       )}
     </div>

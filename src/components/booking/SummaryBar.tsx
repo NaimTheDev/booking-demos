@@ -30,7 +30,7 @@ export function SummaryBar({
   const totalLabel = formatQuoteTotal({ totalPrice, hasQuotedItems })
 
   return (
-    <div className="sticky bottom-0 z-20 -mx-4 -mb-4 mt-8 rounded-b-[inherit] border-t border-border bg-surface/90 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:-mb-6 sm:px-6">
+    <div className="sticky bottom-0 z-20 -mx-4 -mb-4 mt-8 rounded-b-[inherit] border-t border-border bg-surface-secondary px-4 py-3 sm:-mx-6 sm:-mb-6 sm:px-6">
       <div className="flex items-center gap-3">
         <Badge.Anchor>
           <div className="flex size-11 items-center justify-center rounded-2xl bg-accent-soft text-[var(--brand-primary)]">
@@ -44,7 +44,7 @@ export function SummaryBar({
         </Badge.Anchor>
 
         <div className="flex min-w-0 flex-1 flex-col" aria-live="polite">
-          <span className="whitespace-nowrap text-xs text-muted">Estimated total</span>
+          <span className="brand-label whitespace-nowrap text-[11px]">Estimated total</span>
           <div className="flex flex-wrap items-baseline gap-x-2">
             <AnimatePresence mode="popLayout" initial={false}>
               <motion.span
@@ -52,7 +52,7 @@ export function SummaryBar({
                 initial={{ y: 12, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -12, opacity: 0 }}
-                className="text-xl font-bold tracking-tight sm:text-2xl"
+                className="brand-heading text-xl sm:text-2xl"
               >
                 {totalLabel}
               </motion.span>

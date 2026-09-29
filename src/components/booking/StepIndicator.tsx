@@ -31,17 +31,17 @@ export function StepIndicator({ steps, current, maxReached, onStepClick }: StepI
               <span
                 className={cn(
                   'flex size-7 shrink-0 items-center justify-center rounded-full text-xs font-bold transition-colors',
-                  isActive && 'bg-[var(--brand-primary)] text-white',
-                  isDone && 'bg-[var(--brand-accent)] text-white',
-                  !isActive && !isDone && 'bg-surface-secondary text-muted',
+                  isActive && 'bg-[var(--brand-primary)] text-[var(--brand-fg)]',
+                  isDone && 'bg-accent-soft text-[var(--brand-primary)]',
+                  !isActive && !isDone && 'border border-border bg-surface-secondary text-muted',
                 )}
               >
                 {isDone ? <Check className="size-4" aria-hidden="true" /> : i + 1}
               </span>
               <span
                 className={cn(
-                  'hidden truncate text-sm font-medium md:inline',
-                  isActive ? 'text-foreground' : 'text-muted',
+                  'brand-label hidden truncate text-xs md:inline',
+                  !isActive && 'opacity-60',
                 )}
               >
                 {label}
@@ -51,7 +51,7 @@ export function StepIndicator({ steps, current, maxReached, onStepClick }: StepI
               <span
                 className={cn(
                   'h-0.5 flex-1 rounded-full transition-colors',
-                  isDone ? 'bg-[var(--brand-accent)]' : 'bg-border',
+                  isDone ? 'bg-[var(--brand-primary)]' : 'bg-border',
                 )}
                 aria-hidden="true"
               />
