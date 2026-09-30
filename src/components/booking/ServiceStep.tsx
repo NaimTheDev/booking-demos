@@ -43,59 +43,64 @@ export function ServiceStep({
   const categories = getCategories(client)
   const sizeConfig = getSizeGroup(client, category)
   const addons = addonsForCategory(client, category)
+  const hasSizes = sizeConfig.tiers.length > 1
 
   return (
     <div className="flex flex-col gap-6">
-      <div className={cn('grid gap-3', categories.length > 1 && 'sm:grid-cols-2')}>
-        {categories.length > 1 && (
-          <Select
-            className="w-full"
-            value={category}
-            onChange={(key) => key && onCategoryChange(key as ServiceCategory)}
-          >
-            <Label>What are we polishing?</Label>
-            <Select.Trigger>
-              <Select.Value />
-              <Select.Indicator />
-            </Select.Trigger>
-            <Select.Popover>
-              <ListBox>
-                {categories.map((c) => (
-                  <ListBox.Item key={c} id={c} textValue={CATEGORY_LABELS[c]}>
-                    <span className="flex items-center gap-2">
-                      <VerticalIcon vertical={c} className="size-4" />
-                      {CATEGORY_LABELS[c]}
-                    </span>
-                    <ListBox.ItemIndicator />
-                  </ListBox.Item>
-                ))}
-              </ListBox>
-            </Select.Popover>
-          </Select>
-        )}
+      {(categories.length > 1 || hasSizes) && (
+        <div className={cn('grid gap-3', categories.length > 1 && hasSizes && 'sm:grid-cols-2')}>
+          {categories.length > 1 && (
+            <Select
+              className="w-full"
+              value={category}
+              onChange={(key) => key && onCategoryChange(key as ServiceCategory)}
+            >
+              <Label>What are we polishing?</Label>
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+              <Select.Popover>
+                <ListBox>
+                  {categories.map((c) => (
+                    <ListBox.Item key={c} id={c} textValue={CATEGORY_LABELS[c]}>
+                      <span className="flex items-center gap-2">
+                        <VerticalIcon vertical={c} className="size-4" />
+                        {CATEGORY_LABELS[c]}
+                      </span>
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  ))}
+                </ListBox>
+              </Select.Popover>
+            </Select>
+          )}
 
-        <Select
-          className="w-full"
-          value={tier.id}
-          onChange={(key) => key && onTierChange(String(key))}
-        >
-          <Label>{sizeConfig.label}</Label>
-          <Select.Trigger>
-            <Select.Value />
-            <Select.Indicator />
-          </Select.Trigger>
-          <Select.Popover>
-            <ListBox>
-              {sizeConfig.tiers.map((t) => (
-                <ListBox.Item key={t.id} id={t.id} textValue={t.label}>
-                  {t.label}
-                  <ListBox.ItemIndicator />
-                </ListBox.Item>
-              ))}
-            </ListBox>
-          </Select.Popover>
-        </Select>
-      </div>
+          {hasSizes && (
+            <Select
+              className="w-full"
+              value={tier.id}
+              onChange={(key) => key && onTierChange(String(key))}
+            >
+              <Label>{sizeConfig.label}</Label>
+              <Select.Trigger>
+                <Select.Value />
+                <Select.Indicator />
+              </Select.Trigger>
+              <Select.Popover>
+                <ListBox>
+                  {sizeConfig.tiers.map((t) => (
+                    <ListBox.Item key={t.id} id={t.id} textValue={t.label}>
+                      {t.label}
+                      <ListBox.ItemIndicator />
+                    </ListBox.Item>
+                  ))}
+                </ListBox>
+              </Select.Popover>
+            </Select>
+          )}
+        </div>
+      )}
 
       <section className="flex flex-col gap-3">
         <SectionHeading icon={<VerticalIcon vertical={category} className="size-4" />}>

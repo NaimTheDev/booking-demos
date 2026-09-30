@@ -64,8 +64,12 @@ export interface HeroConfig {
     wordmark?: string
     /** e.g. 'brightness(0) invert(1)' to show a dark logo on a dark header. */
     logoFilter?: string
+    /** Solid brand block behind the logo (e.g. Snap & Crack's yellow tile). */
+    logoPlate?: string
+    /** 'lg' for square badge logos that read too small at the default height. */
+    logoSize?: 'md' | 'lg'
     /** Right-hand header item. */
-    action?: { label: string; href: string; style: 'button' | 'outline' | 'text' }
+    action?: { label: string; href: string; style: 'button' | 'outline' | 'text'; color?: string }
   }
   /**
    * 'banner': full-width hero band with the booking card below.
@@ -75,13 +79,23 @@ export interface HeroConfig {
   background: string
   fg: string
   align: 'left' | 'center'
-  eyebrow?: { text: string; style: 'pill' | 'mono' | 'italic' | 'caps' }
+  eyebrow?: {
+    text: string
+    style: 'pill' | 'badge' | 'mono' | 'italic' | 'caps' | 'script'
+    /** Font family for the 'script' style. */
+    font?: string
+    color?: string
+  }
   /** Lighter line shown above the headline. */
   kicker?: string
   headline: string
+  /** Headline color when it differs from the hero text color. */
+  headlineColor?: string
   /** Trailing word(s) of the headline set in `highlightColor`. */
   highlight?: string
   highlightColor?: string
+  /** Put the highlighted words on their own line. */
+  highlightOnNewLine?: boolean
   /** Lighter second line under the headline. */
   subline?: string
   sub?: string
@@ -90,6 +104,8 @@ export interface HeroConfig {
   size: 'md' | 'lg' | 'xl'
   /** Pull the booking card up over the hero. */
   overlap: boolean
+  /** Translucent box behind the hero copy, like a text panel over a photo. */
+  box?: string
 }
 
 // Arimo is metric-compatible with Arial/Helvetica, for machines (e.g. Linux) that have neither.
@@ -465,6 +481,381 @@ export const themes: Record<string, ClientTheme> = {
       eyebrow: { text: 'Mobile. Friendly. Clean.', style: 'italic' },
       headline: 'Car Detailing Columbus OH',
       sub: 'Book your interior, exterior or paint correction appointment below.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+
+  // deluxedetailingoh.com — Duda site: charcoal page, deep-red logo band, Oswald caps, tracked Lato buttons.
+  'deluxe-detailing': {
+    googleFonts: ['Oswald:wght@500;700', 'Lato:wght@400;700', 'Montserrat:wght@600;700'],
+    mode: 'dark',
+    display: { font: 'Oswald', weight: 700, case: 'uppercase', tracking: '0.005em', color: '#FAFAFA' },
+    heading: { font: 'Oswald', weight: 500, case: 'uppercase', tracking: '0.01em', color: '#FFFFFF' },
+    body: { font: 'Lato' },
+    label: { font: 'Lato', weight: 700, case: 'uppercase', tracking: '0.2em', color: '#BDBDBD' },
+    radius: 3,
+    colors: {
+      page: '#161616',
+      surface: '#1C1C1C',
+      surfaceAlt: '#232323',
+      text: '#EEEEEE',
+      muted: '#A8A8A8',
+      border: '#333333',
+      brand: '#B3180A',
+      brandFg: '#FFFFFF',
+      accent: '#D0301F',
+    },
+    button: { bg: '#831005', fg: '#FFFFFF', radius: 3, case: 'uppercase', tracking: '0.2em', weight: 400, font: 'Lato' },
+    hero: {
+      nav: {
+        bg: '#161616',
+        fg: '#FFFFFF',
+        logoPlate: '#831005',
+        action: { label: 'Call (614) 570-0617', href: 'tel:6145700617', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(90deg, #1c1c1c 0%, #1c1c1c 55%, #262626 100%)',
+      fg: '#FAFAFA',
+      align: 'left',
+      headline: 'Book Columbus Ohio’s #1 mobile detailing team',
+      sub: 'All the great detailing services you need in one place — at your driveway in Dublin, Powell and New Albany.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+
+  // spashine.net — airy Vite/React site: white and sky blue, Inter 600 with tight tracking, two-tone headline, pill buttons.
+  spashine: {
+    googleFonts: ['Inter:wght@400;500;600'],
+    mode: 'light',
+    display: { font: 'Inter', weight: 600, tracking: '-0.025em', color: '#161D27' },
+    heading: { font: 'Inter', weight: 600, tracking: '-0.015em', color: '#161D27' },
+    body: { font: 'Inter' },
+    label: { font: 'Inter', weight: 500, case: 'uppercase', tracking: '0.1em', color: '#5B6472' },
+    radius: 16,
+    colors: {
+      page: '#F7FBFF',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F1F5F9',
+      text: '#161D27',
+      muted: '#5B6472',
+      border: '#E2E8F0',
+      brand: '#1F9EF9',
+      brandFg: '#FFFFFF',
+      accent: '#1F9EF9',
+    },
+    button: { bg: '#1F9EF9', fg: '#FFFFFF', radius: 999, weight: 500 },
+    hero: {
+      nav: { bg: 'rgba(255, 255, 255, 0)', fg: '#161D27', wordmark: 'SpaShine', action: { label: 'Book Now', href: '#booking', style: 'button' } },
+      layout: 'banner',
+      background: 'linear-gradient(180deg, #D7EEFF 0%, #EAF6FF 55%, #F7FBFF 100%)',
+      fg: '#161D27',
+      align: 'center',
+      eyebrow: { text: 'Mobile detailing · Columbus, OH', style: 'badge' },
+      headline: 'Book mobile car detailing',
+      highlight: 'in Columbus, Ohio',
+      highlightColor: '#3AAEFA',
+      highlightOnNewLine: true,
+      sub: 'Premium interior and exterior detailing brought directly to your driveway. Essential Clean from $225 · Full Detail from $250.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+
+  // mhautodetail.com — Duda site: black info bar, dark green-tinted hero, Questrial, square pure-green and blue buttons.
+  'mh-auto': {
+    googleFonts: ['Questrial', 'Ubuntu:wght@400;500;700'],
+    mode: 'light',
+    display: { font: 'Questrial', weight: 400, tracking: '-0.005em' },
+    heading: { font: 'Questrial', weight: 400, color: '#000000' },
+    body: { font: 'Ubuntu' },
+    label: { font: 'Questrial', weight: 400, case: 'uppercase', tracking: '0.18em', color: '#4D4D4D' },
+    radius: 0,
+    colors: {
+      page: '#EEEEEE',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F6F6F6',
+      text: '#111111',
+      muted: '#4D4D4D',
+      border: '#DDDDDD',
+      brand: '#008000',
+      brandFg: '#FFFFFF',
+      accent: '#0404C9',
+    },
+    button: { bg: '#008000', fg: '#FFFFFF', radius: 0, case: 'uppercase', weight: 400, font: 'Questrial' },
+    hero: {
+      topBar: {
+        bg: '#111111',
+        fg: '#FFFFFF',
+        items: ['Serving Columbus, Ohio and the surrounding areas!', 'Monday – Friday: 8:00 AM – 6:00 PM | Saturday – Sunday: Closed'],
+      },
+      nav: {
+        logoSize: 'lg',
+        bg: 'transparent',
+        fg: '#FFFFFF',
+        action: { label: 'Call (614) 962-4554', href: 'tel:6149624554', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(135deg, rgba(0,0,0,0.82) 0%, rgba(0,0,0,0.55) 45%, rgba(0,120,0,0.75) 100%), #14331a',
+      fg: '#FFFFFF',
+      align: 'center',
+      eyebrow: { text: 'Ceramic coatings, paint correction, and full detailing services', style: 'caps' },
+      headline: 'Be proud of your vehicle once again',
+      sub: 'Book your mobile detail with MH Auto Detailing.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+
+  // columbusohmobilemechanics.com — Duda template: crimson header, translucent crimson text panel over a dark photo, Red Rose headings.
+  'columbus-mobile-mechanics': {
+    googleFonts: ['Red+Rose:wght@400;700', 'Poppins:wght@300;400;600'],
+    mode: 'light',
+    display: { font: '"Red Rose"', weight: 700 },
+    heading: { font: '"Red Rose"', weight: 700, color: '#000000' },
+    body: { font: 'Poppins' },
+    label: { font: 'Poppins', weight: 600, case: 'uppercase', tracking: '0.06em', color: '#463939' },
+    radius: 6,
+    colors: {
+      page: '#EEEEEE',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F5F5F5',
+      text: '#111111',
+      muted: '#555555',
+      border: '#DDDDDD',
+      brand: '#C2002D',
+      brandFg: '#FFFFFF',
+      accent: '#C2002D',
+    },
+    button: { bg: '#000000', fg: '#FFFFFF', radius: 6, case: 'uppercase', weight: 600 },
+    hero: {
+      nav: {
+        bg: '#C2002D',
+        fg: '#FFFFFF',
+        wordmark: 'Columbus Mobile Mechanics Co.',
+        action: { label: '614-618-4646', href: 'tel:6146184646', style: 'text' },
+      },
+      layout: 'banner',
+      background: 'radial-gradient(ellipse 70% 90% at 80% 40%, #5a5048 0%, #2b2622 55%, #151311 100%)',
+      fg: '#FFFFFF',
+      align: 'left',
+      headline: 'Columbus Mobile Mechanics Co.',
+      sub: 'Mobile mechanics serving Columbus, Ohio. Book on-site diagnostics and repair at your driveway.',
+      box: 'rgba(194, 0, 45, 0.82)',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+
+  // furballfitnesspetcare.com — Wix: boxed page, cream header band, grey tab nav, red Raleway headings and red buttons.
+  'furball-fitness': {
+    googleFonts: ['Raleway:wght@400;500;700'],
+    mode: 'light',
+    display: { font: 'Raleway', weight: 500, color: '#B5222A' },
+    heading: { font: 'Raleway', weight: 700, color: '#B5222A' },
+    body: { font: 'Raleway' },
+    label: { font: 'Raleway', weight: 700, case: 'uppercase', tracking: '0.04em', color: '#555555' },
+    radius: 5,
+    colors: {
+      page: '#FFFFFF',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F7F5E6',
+      text: '#1A1A1A',
+      muted: '#555555',
+      border: '#DCD8B0',
+      brand: '#BE1724',
+      brandFg: '#FFFFFF',
+      accent: '#BE1724',
+    },
+    button: { bg: '#BE1724', fg: '#FFFFFF', radius: 5, case: 'uppercase', weight: 700 },
+    hero: {
+      nav: {
+        logoSize: 'lg',
+        bg: '#EFECC2',
+        fg: '#000000',
+        action: { label: '(614) 986-9890', href: 'tel:6149869890', style: 'text' },
+      },
+      layout: 'banner',
+      background: '#FFFFFF',
+      fg: '#1A1A1A',
+      align: 'left',
+      headline: 'Mobile Baths & Nail Trims',
+      headlineColor: '#B5222A',
+      sub: 'Our BarkBath machine comes to your door, Monday through Friday. Book a mobile bath, nail trim or Dremel below.',
+      size: 'md',
+      overlap: false,
+    },
+  },
+
+  // columbusohiotint.com — WordPress: black warranty bar, charcoal header with the big logo, grey tab nav, Raleway on light grey.
+  'tint-works': {
+    googleFonts: ['Raleway:wght@500;700', 'Lato:wght@400;700'],
+    mode: 'light',
+    display: { font: 'Raleway', weight: 700, color: '#FFFFFF' },
+    heading: { font: 'Raleway', weight: 700, color: '#333333' },
+    body: { font: 'Lato' },
+    label: { font: 'Raleway', weight: 500, case: 'uppercase', tracking: '0.05em', color: '#595959' },
+    radius: 4,
+    colors: {
+      page: '#F3F3F3',
+      surface: '#FFFFFF',
+      surfaceAlt: '#EFEFEF',
+      text: '#333333',
+      muted: '#848484',
+      border: '#DDDDDD',
+      brand: '#010066',
+      brandFg: '#FFFFFF',
+      accent: '#D2112B',
+    },
+    button: { bg: '#D2112B', fg: '#FFFFFF', radius: 4, weight: 700 },
+    hero: {
+      topBar: { bg: '#000000', fg: '#FFFFFF', items: ['Lifetime Warranty on all window film and Labor'], align: 'start' },
+      nav: {
+        logoSize: 'lg', bg: '#333333', fg: '#FFFFFF', action: { label: '(614) 649-5878', href: 'tel:6146495878', style: 'text' } },
+      layout: 'banner',
+      background: '#000000',
+      fg: '#FFFFFF',
+      align: 'center',
+      headline: 'Book window tint in Powell & Columbus, Ohio',
+      sub: 'Tint Works & Car Audio — premier automotive customization. One company, two locations.',
+      size: 'md',
+      overlap: false,
+    },
+  },
+
+  // motintking.com — Next.js: near-black and cream, Archivo Black with tight tracking, IBM Plex Mono labels, square yellow buttons.
+  motint: {
+    googleFonts: ['Archivo+Black', 'IBM+Plex+Sans:wght@400;500;600', 'IBM+Plex+Mono:wght@500;600'],
+    mode: 'dark',
+    display: { font: '"Archivo Black"', weight: 400, tracking: '-0.055em' },
+    heading: { font: '"Archivo Black"', weight: 400, tracking: '-0.03em' },
+    body: { font: '"IBM Plex Sans"' },
+    label: { font: '"IBM Plex Mono"', weight: 600, case: 'uppercase', tracking: '0.16em', color: '#F6CA4B' },
+    radius: 0,
+    colors: {
+      page: '#0A0B09',
+      surface: '#101512',
+      surfaceAlt: '#171914',
+      text: '#FFFEFA',
+      muted: '#B7B4A8',
+      border: '#2A2E28',
+      brand: '#F6CA4B',
+      brandFg: '#0A0B09',
+      accent: '#F6CA4B',
+    },
+    button: {
+      bg: '#E0B83F',
+      fg: '#101512',
+      radius: 0,
+      case: 'uppercase',
+      tracking: '0.1em',
+      weight: 600,
+      font: '"IBM Plex Mono"',
+    },
+    hero: {
+      nav: {
+        bg: '#0A0B09',
+        fg: '#FFFEFA',
+        borderColor: '#2A2E28',
+        action: { label: '614-822-0494', href: 'tel:6148220494', style: 'button' },
+      },
+      layout: 'banner',
+      background: '#0A0B09',
+      fg: '#FFFEFA',
+      align: 'left',
+      eyebrow: { text: 'Columbus · Tint · Wraps · PPF', style: 'mono' },
+      headline: 'Make the car yours.',
+      sub: 'Tint, wraps and paint protection — installed at our Trabue Road shop. Pick a service and a time below.',
+      size: 'xl',
+      overlap: false,
+    },
+  },
+
+  // adonispressurewash.com — GoDaddy: black promo bar, white header, red hero with silver Righteous caps, square black/white buttons.
+  'adonis-pressure-wash': {
+    googleFonts: ['Righteous', 'Josefin+Sans:wght@400;600;700'],
+    mode: 'light',
+    display: { font: 'Righteous', weight: 400, case: 'uppercase', tracking: '0.12em', color: '#C0C0C0' },
+    heading: { font: 'Righteous', weight: 400, case: 'uppercase', tracking: '0.08em', color: '#161616' },
+    body: { font: '"Josefin Sans"' },
+    label: { font: '"Josefin Sans"', weight: 700, case: 'uppercase', tracking: '0.1em', color: '#161616' },
+    radius: 0,
+    colors: {
+      page: '#F6F6F6',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F6F6F6',
+      text: '#161616',
+      muted: '#595959',
+      border: '#DDDDDD',
+      brand: '#BF1111',
+      brandFg: '#FFFFFF',
+      accent: '#BF1111',
+    },
+    button: { bg: '#000000', fg: '#FFFFFF', radius: 0, case: 'uppercase', tracking: '0.06em', weight: 600 },
+    hero: {
+      topBar: {
+        bg: '#161616',
+        fg: '#FFFFFF',
+        items: ['10-Year Anniversary Special House + Driveway — $424 Restrictions apply'],
+        align: 'center',
+        uppercase: true,
+      },
+      nav: {
+        logoSize: 'lg', bg: '#FFFFFF', fg: '#161616', action: { label: 'Get a free quote', href: '#booking', style: 'button' } },
+      layout: 'banner',
+      background: '#BF1111',
+      fg: '#FFFFFF',
+      align: 'left',
+      headline: 'Professional pressure washing in Columbus & Central Ohio',
+      headlineColor: '#C0C0C0',
+      sub: 'Residential • Commercial • Fleet Washing. Proudly serving Central Ohio for 10 years.',
+      size: 'md',
+      overlap: false,
+    },
+  },
+
+  // snapandcracklocksmith.com — Divi: yellow logo tile, royal-blue info bar, Oswald hero with a yellow rule, yellow buttons with blue text.
+  'snap-and-crack': {
+    googleFonts: ['Oswald:wght@500', 'Inter:wght@400;600;700'],
+    mode: 'light',
+    display: { font: 'Oswald', weight: 500 },
+    heading: { font: 'Oswald', weight: 500, color: '#0A2C8A' },
+    body: { font: 'Inter' },
+    label: { font: 'Oswald', weight: 500, case: 'uppercase', tracking: '0.04em', color: '#0A2C8A' },
+    radius: 3,
+    colors: {
+      page: '#F8F8F8',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F2F2F2',
+      text: '#333333',
+      muted: '#5C5C5C',
+      border: '#E1E1E1',
+      brand: '#0A2C8A',
+      brandFg: '#FFFFFF',
+      accent: '#0A2C8A',
+    },
+    button: { bg: '#FFD200', fg: '#2B388F', radius: 3, weight: 700 },
+    hero: {
+      topBar: {
+        bg: '#0A2C8A',
+        fg: '#FFFFFF',
+        items: ['Locksmith near me — serving the Columbus, OH metro region since 2013', 'Mobile service hours Mon–Sun: 7:00 am to 10:00 pm'],
+      },
+      nav: {
+        bg: '#EEEEEE',
+        fg: '#333333',
+        logoPlate: '#FFD200',
+        action: { label: '614-701-9991', href: 'tel:6147019991', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.55)), linear-gradient(180deg, #5b7fa8 0%, #3f5f86 55%, #33482f 100%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      headline: 'Book your trusted Columbus locksmith',
+      ornament: 'rule',
+      ornamentColor: '#FFD200',
+      sub: 'Proudly serving local clients since 2013 — same-day service and up-front pricing.',
       size: 'lg',
       overlap: false,
     },

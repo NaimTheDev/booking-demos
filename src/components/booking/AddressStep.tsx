@@ -34,7 +34,7 @@ export function AddressStep({ client, address, onAddressChange, status }: Addres
             <Alert status="success">
               <Alert.Indicator />
               <Alert.Content>
-                <Alert.Title>✓ Address Verified! Free Pickup &amp; Mobile Service Available.</Alert.Title>
+                <Alert.Title>✓ Address Verified! Mobile service available at your address.</Alert.Title>
                 <Alert.Description>
                   You're inside {client.name}'s home service area — no travel fees.
                 </Alert.Description>

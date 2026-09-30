@@ -54,6 +54,19 @@ function TopBar({ topBar }: { topBar: NonNullable<HeroConfig['topBar']> }) {
 
 function LogoMark({ client, theme, className }: { client: ClientConfig; theme: ClientTheme; className?: string }) {
   const { nav } = theme.hero
+  if (nav.wordmark && client.logo) {
+    // Small badge logo beside a text wordmark (e.g. SpaShine).
+    return (
+      <span className="flex items-center gap-2.5">
+        <img
+          src={`${import.meta.env.BASE_URL}${client.logo.src.replace(/^\//, '')}`}
+          alt=""
+          className="size-10 object-contain"
+        />
+        <span className="brand-heading text-lg" style={{ color: nav.fg }}>{nav.wordmark}</span>
+      </span>
+    )
+  }
   if (nav.wordmark || !client.logo) {
     return (
       <span className="brand-label text-xs sm:text-[13px]" style={{ color: nav.fg, letterSpacing: '0.3em' }}>
@@ -61,13 +74,19 @@ function LogoMark({ client, theme, className }: { client: ClientConfig; theme: C
       </span>
     )
   }
-  return (
+  const img = (
     <img
       src={`${import.meta.env.BASE_URL}${client.logo.src.replace(/^\//, '')}`}
       alt={`${client.name} logo`}
       className={cn('w-auto object-contain', className)}
       style={{ filter: nav.logoFilter }}
     />
+  )
+  if (!nav.logoPlate) return img
+  return (
+    <span className="-my-3 flex self-stretch items-center px-3 py-3 sm:px-5" style={{ background: nav.logoPlate }}>
+      {img}
+    </span>
   )
 }
 
@@ -86,7 +105,11 @@ function NavBar({ client, theme, overHero }: { client: ClientConfig; theme: Clie
         className={cn('flex items-center justify-between gap-4 px-4 py-3 sm:px-6', !overHero && 'mx-auto max-w-6xl')}
         style={{ background: overHero ? nav.bg : undefined }}
       >
-        <LogoMark client={client} theme={theme} className="h-10 max-w-44 sm:h-14 sm:max-w-60" />
+        <LogoMark
+          client={client}
+          theme={theme}
+          className={nav.logoSize === 'lg' ? 'h-14 max-w-48 sm:h-24 sm:max-w-72' : 'h-10 max-w-44 sm:h-14 sm:max-w-60'}
+        />
         {nav.action && <NavAction action={nav.action} fg={nav.fg} />}
       </div>
     </header>
@@ -115,7 +138,7 @@ function NavAction({ action, fg }: { action: NonNullable<HeroConfig['nav']['acti
         borderRadius: 'var(--btn-radius)',
         ...(action.style === 'button'
           ? { background: 'var(--btn-bg)', color: 'var(--btn-fg)' }
-          : { border: '1px solid var(--brand-border)', color: 'var(--brand-primary)' }),
+          : { border: `1px solid ${action.color ?? 'var(--brand-border)'}`, color: action.color ?? 'var(--brand-primary)' }),
       }}
     >
       {action.label}
@@ -137,6 +160,24 @@ function Eyebrow({ eyebrow }: { eyebrow: NonNullable<HeroConfig['eyebrow']> }) {
       </span>
     )
   }
+  if (eyebrow.style === 'badge') {
+    return (
+      <span
+        className="brand-label flex items-center gap-2 rounded-full border px-3.5 py-1.5 text-[11px] sm:text-xs"
+        style={{ background: 'var(--brand-surface)', borderColor: 'var(--brand-border)' }}
+      >
+        <span className="size-1.5 rounded-full bg-[var(--brand-primary)]" aria-hidden="true" />
+        {eyebrow.text}
+      </span>
+    )
+  }
+  if (eyebrow.style === 'script') {
+    return (
+      <span className="text-5xl leading-none sm:text-7xl" style={{ fontFamily: eyebrow.font, color: eyebrow.color }}>
+        {eyebrow.text}
+      </span>
+    )
+  }
   if (eyebrow.style === 'italic') {
     return <span className="text-xl font-bold italic sm:text-2xl">{eyebrow.text}</span>
   }
@@ -148,11 +189,17 @@ function Eyebrow({ eyebrow }: { eyebrow: NonNullable<HeroConfig['eyebrow']> }) {
 
 function Headline({ hero }: { hero: HeroConfig }) {
   return (
-    <h1 className={cn('brand-display', SIZES[hero.size])} style={{ textShadow: hero.ornament === 'frame' ? '2px 2px 6px rgba(0,0,0,0.45)' : undefined }}>
+    <h1
+      className={cn('brand-display', SIZES[hero.size])}
+      style={{
+        color: hero.headlineColor,
+        textShadow: hero.ornament === 'frame' ? '2px 2px 6px rgba(0,0,0,0.45)' : undefined,
+      }}
+    >
       {hero.headline}
       {hero.highlight && (
         <>
-          {' '}
+          {hero.highlightOnNewLine ? <br /> : ' '}
           <span style={{ color: hero.highlightColor }}>{hero.highlight}</span>
         </>
       )}
@@ -162,15 +209,8 @@ function Headline({ hero }: { hero: HeroConfig }) {
 
 function BannerHero({ hero }: { hero: HeroConfig }) {
   const centered = hero.align === 'center'
-  return (
-    <section
-      className={cn(
-        'mx-auto flex max-w-6xl flex-col gap-4 px-4 sm:px-6',
-        centered ? 'items-center text-center' : 'items-start',
-        hero.size === 'xl' ? 'pb-14 pt-12 sm:pb-20 sm:pt-20' : 'pb-12 pt-10 sm:pb-16 sm:pt-16',
-        hero.overlap && 'pb-24 sm:pb-28',
-      )}
-    >
+  const content = (
+    <>
       {hero.eyebrow && <Eyebrow eyebrow={hero.eyebrow} />}
       {hero.kicker && <p className="text-2xl font-normal sm:text-3xl">{hero.kicker}</p>}
       {hero.ornament === 'frame' ? (
@@ -189,6 +229,24 @@ function BannerHero({ hero }: { hero: HeroConfig }) {
         <span className="my-1 block h-0.5 w-40 sm:w-60" style={{ background: hero.ornamentColor }} aria-hidden="true" />
       )}
       {hero.sub && <p className={cn('max-w-2xl text-base opacity-85 sm:text-lg', centered && 'mx-auto')}>{hero.sub}</p>}
+    </>
+  )
+  return (
+    <section
+      className={cn(
+        'mx-auto flex max-w-6xl flex-col px-4 sm:px-6',
+        centered ? 'items-center text-center' : 'items-start',
+        hero.size === 'xl' ? 'pb-14 pt-12 sm:pb-20 sm:pt-20' : 'pb-12 pt-10 sm:pb-16 sm:pt-16',
+        hero.overlap && 'pb-24 sm:pb-28',
+      )}
+    >
+      {hero.box ? (
+        <div className={cn('flex max-w-xl flex-col gap-4 rounded-[var(--brand-radius)] p-6 sm:p-10', centered ? 'items-center' : 'items-start')} style={{ background: hero.box }}>
+          {content}
+        </div>
+      ) : (
+        <div className={cn('flex flex-col gap-4', centered ? 'items-center' : 'items-start')}>{content}</div>
+      )}
     </section>
   )
 }

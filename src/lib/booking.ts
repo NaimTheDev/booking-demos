@@ -62,6 +62,12 @@ export const SIZE_TIERS: Record<ServiceCategory, SizeGroup> = {
       { id: '33-plus', label: '33 ft+ (Class A / fifth wheel)', priceMultiplier: 1.65, hoursMultiplier: 1.5, referenceFeet: 36 },
     ],
   },
+  // Flat-priced trades: one tier, so the size picker is hidden.
+  mechanic: { label: 'Vehicle', tiers: [{ id: 'any', label: 'Any vehicle', hoursMultiplier: 1 }] },
+  pet: { label: 'Pet', tiers: [{ id: 'any', label: 'Any size', hoursMultiplier: 1 }] },
+  tint: { label: 'Vehicle', tiers: [{ id: 'any', label: 'Any vehicle', hoursMultiplier: 1 }] },
+  exterior: { label: 'Property', tiers: [{ id: 'any', label: 'Standard home', hoursMultiplier: 1 }] },
+  locksmith: { label: 'Job', tiers: [{ id: 'any', label: 'Standard', hoursMultiplier: 1 }] },
 }
 
 export const CATEGORY_LABELS: Record<ServiceCategory, string> = {
@@ -69,6 +75,11 @@ export const CATEGORY_LABELS: Record<ServiceCategory, string> = {
   marine: 'Marine',
   stone: 'Stone & Marble',
   rv: 'RV & Camper',
+  mechanic: 'Mobile Mechanic',
+  pet: 'Pet Grooming',
+  tint: 'Window Tint & Film',
+  exterior: 'Pressure Washing',
+  locksmith: 'Locksmith',
 }
 
 /** Categories a client offers, in the order they first appear in its service list. */

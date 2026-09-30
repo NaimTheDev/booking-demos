@@ -26,7 +26,7 @@ import { SummaryBar } from './booking/SummaryBar'
 
 const STEPS = [
   { label: 'Service', title: 'Build your service', subtitle: 'Pick a package and any add-ons.' },
-  { label: 'Location', title: 'Where should we meet you?', subtitle: 'We bring everything — water, power, and pros.' },
+  { label: 'Location', title: 'Where should we meet you?', subtitle: 'We come to you — just tell us where.' },
   { label: 'Schedule', title: 'Choose a time', subtitle: 'Your full service block is reserved on our calendar.' },
   { label: 'Confirm', title: 'Lock it in', subtitle: 'A small deposit holds your spot.' },
 ] as const
