@@ -38,7 +38,15 @@ export function DemoPage() {
           <ArrowLeft className="size-3.5" aria-hidden="true" />
           All demos
         </Link>
-        <span className="truncate">Booking demo preview · {client.name}</span>
+        <span className="flex min-w-0 items-center gap-3">
+          <span className="truncate">Booking demo preview · {client.name}</span>
+          <Link
+            to={`/demo/${client.slug}/owner`}
+            className="shrink-0 font-medium text-neutral-200 hover:text-white"
+          >
+            Owner view →
+          </Link>
+        </span>
       </div>
       {/* key resets widget state when navigating between clients. */}
       <BookingDemo key={client.slug} client={client} theme={theme} />

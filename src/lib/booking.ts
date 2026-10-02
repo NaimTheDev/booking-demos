@@ -10,6 +10,9 @@ import type {
 
 export const DEPOSIT_AMOUNT = 50
 
+/** Default fee for addresses outside a client's free service radius. */
+export const TRAVEL_FEE = 25
+
 /** Business hours used to decide whether a slot can fit the allocated block. */
 const OPEN_HOUR = 8
 const CLOSE_HOUR = 18
@@ -181,6 +184,10 @@ export function validateAddress(input: string, client: Pick<ClientConfig, 'freeR
   return zip || normalized.length >= 8 ? 'outside' : 'idle'
 }
 
+export function travelFeeFor(client: Pick<ClientConfig, 'travelFee'>, status: AddressStatus): number {
+  return status === 'outside' ? (client.travelFee ?? TRAVEL_FEE) : 0
+}
+
 /** "$395", or "$49.95" when the amount has cents. */
 export function formatCurrency(amount: number): string {
   const hasCents = Math.round(amount * 100) % 100 !== 0
@@ -246,6 +253,16 @@ export function getUpcomingDays(count: number, from = new Date()): BookingDay[] 
   return days
 }
 
+/** The next `count` open days starting today (or the next open day), plus today's key. */
+export function getScheduleDays(count: number, now = new Date()): { days: BookingDay[]; todayKey: string } {
+  const yesterday = new Date(now)
+  yesterday.setDate(now.getDate() - 1)
+  return {
+    days: getUpcomingDays(count, yesterday),
+    todayKey: `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`,
+  }
+}
+
 export interface TimeSlot {
   id: string
   start: number
@@ -260,6 +277,13 @@ function hash(input: string): number {
   let h = 0
   for (let i = 0; i < input.length; i++) h = (h * 31 + input.charCodeAt(i)) | 0
   return Math.abs(h)
+}
+
+/** Scrambles a hash so nearby inputs ("…:0", "…:1") don't give nearby outputs. */
+function mix(n: number): number {
+  let x = Math.imul(n ^ (n >>> 16), 0x45d9f3b)
+  x = Math.imul(x ^ (x >>> 16), 0x45d9f3b)
+  return (x ^ (x >>> 16)) >>> 0
 }
 
 export function getSlotsForDay(clientSlug: string, dayKey: string, blockHours: number): TimeSlot[] {
@@ -281,4 +305,51 @@ export function getSlotsForDay(clientSlug: string, dayKey: string, blockHours: n
     slots[0] = { ...slots[0], status: 'open' }
   }
   return slots
+}
+
+/** A job as the owner dashboard shows it. */
+export interface OwnerBooking {
+  id: string
+  dayKey: string
+  /** Fractional start hour (13.5 = 1:30 PM). */
+  start: number
+  customer: string
+  serviceName: string
+  address: string
+  /** `null` when the job is priced by quote. */
+  price: number | null
+  hours: number
+  /** The booking just made in the customer demo. */
+  isNew?: boolean
+}
+
+const SAMPLE_CUSTOMERS = [
+  'Alex M.', 'Brianna K.', 'Chris D.', 'Dana R.', 'Eli W.', 'Fatima S.', 'Grant H.', 'Hannah P.',
+  'Isaac T.', 'Jasmine L.', 'Kevin O.', 'Lauren B.', 'Marcus J.', 'Nina G.', 'Omar F.', 'Paige C.',
+]
+const SAMPLE_STREETS = ['Maple Ave', 'Oak St', 'Lakeview Dr', 'Main St', 'Park Pl', 'Ridge Rd', 'Elm Ct', 'Center St']
+
+/** Deterministic fake jobs for the owner dashboard: 2–3 per day, so a client always shows the same week. */
+export function getSampleBookings(client: ClientConfig, days: BookingDay[]): OwnerBooking[] {
+  const town = client.address.match(/([A-Za-z .]+), OH/)?.[1]?.trim() ?? 'Columbus'
+  return days.flatMap((day) => {
+    const seed = mix(hash(`${client.slug}:${day.key}:owner`))
+    const count = 2 + (seed % 2)
+    return SLOT_STARTS.slice(0, count).map((start, i): OwnerBooking => {
+      const n = mix(hash(`${seed}:${i}`))
+      const service = client.services[n % client.services.length]
+      const tiers = getSizeGroup(client, serviceCategory(client, service)).tiers
+      const tier = tiers[(n >>> 3) % tiers.length]
+      return {
+        id: `${day.key}-${i}`,
+        dayKey: day.key,
+        start,
+        customer: SAMPLE_CUSTOMERS[n % SAMPLE_CUSTOMERS.length],
+        serviceName: tiers.length > 1 ? `${service.name} · ${tier.label}` : service.name,
+        address: `${100 + (n % 9800)} ${SAMPLE_STREETS[(n >>> 5) % SAMPLE_STREETS.length]}, ${town}`,
+        price: servicePrice(service, tier),
+        hours: serviceHours(service, tier),
+      }
+    })
+  })
 }

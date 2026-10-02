@@ -1,15 +1,20 @@
 import { AnimatePresence, motion } from 'framer-motion'
 import { useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import type { ClientConfig, ServiceCategory } from '../data/clients'
 import {
   calculateQuote,
+  formatClock,
   getCategories,
   getTier,
   getUpcomingDays,
   serviceCategory,
   addonsForCategory,
   getSizeGroup,
+  travelFeeFor,
   validateAddress,
+  TRAVEL_FEE,
+  type OwnerBooking,
   type TimeSlot,
 } from '../lib/booking'
 import type { ClientTheme } from '../data/themes'
@@ -56,10 +61,17 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
   const [dayKey, setDayKey] = useState(days[0].key)
   const [slot, setSlot] = useState<TimeSlot | null>(null)
   const [contact, setContact] = useState<ContactInfo>(EMPTY_CONTACT)
+  const [photos, setPhotos] = useState<File[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isConfirmed, setIsConfirmed] = useState(false)
   // Snapshot so the modal keeps its content while "Book another" resets the form behind it.
-  const [confirmed, setConfirmed] = useState<{ summary: BookingSummary; contact: ContactInfo } | null>(null)
+  const [confirmed, setConfirmed] = useState<{
+    summary: BookingSummary
+    contact: ContactInfo
+    photoCount: number
+    booking: OwnerBooking
+  } | null>(null)
+  const navigate = useNavigate()
 
   const services = client.services.filter((s) => serviceCategory(client, s) === category)
   const selectedService = client.services.find((s) => s.id === serviceId)
@@ -67,6 +79,8 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
   const tier = getTier(client, category, tierId)
   const quote = calculateQuote(selectedService, tier, selectedAddons)
   const addressStatus = validateAddress(address, client)
+  const travelFee = travelFeeFor(client, addressStatus)
+  const totalPrice = quote.totalPrice + travelFee
   const selectedDay = days.find((d) => d.key === dayKey) ?? days[0]
 
   const canContinue = [
@@ -81,7 +95,8 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
     addonNames: selectedAddons.map((a) => a.name),
     address: address.trim(),
     when: slot ? `${selectedDay.weekday}, ${selectedDay.label} at ${slot.startLabel}` : '',
-    totalPrice: quote.totalPrice,
+    totalPrice,
+    travelFee,
     totalHours: quote.totalHours,
     hasQuotedItems: quote.hasQuotedItems,
   }
@@ -122,7 +137,22 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
     setIsSubmitting(true)
     window.setTimeout(() => {
       setIsSubmitting(false)
-      setConfirmed({ summary, contact })
+      setConfirmed({
+        summary,
+        contact,
+        photoCount: photos.length,
+        booking: {
+          id: 'new',
+          dayKey: selectedDay.key,
+          start: slot?.start ?? 8,
+          customer: contact.name.trim(),
+          serviceName: summary.serviceName,
+          address: summary.address,
+          price: quote.hasQuotedItems ? null : totalPrice,
+          hours: quote.totalHours,
+          isNew: true,
+        },
+      })
       setIsConfirmed(true)
     }, SIMULATED_PAYMENT_MS)
   }
@@ -136,6 +166,7 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
     setAddress('')
     setSlot(null)
     setContact(EMPTY_CONTACT)
+    setPhotos([])
   }
 
   const current = STEPS[step]
@@ -200,6 +231,7 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
                   address={address}
                   onAddressChange={setAddress}
                   status={addressStatus}
+                  travelFee={client.travelFee ?? TRAVEL_FEE}
                 />
               )}
               {step === 2 && (
@@ -221,6 +253,8 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
                   contact={contact}
                   onContactChange={setContact}
                   summary={summary}
+                  photos={photos}
+                  onPhotosChange={setPhotos}
                   isSubmitting={isSubmitting}
                   onSubmit={handleSubmit}
                 />
@@ -229,7 +263,7 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
           </AnimatePresence>
 
           <SummaryBar
-            totalPrice={quote.totalPrice}
+            totalPrice={totalPrice}
             totalHours={quote.totalHours}
             hasQuotedItems={quote.hasQuotedItems}
             addonCount={selectedAddons.length}
@@ -251,6 +285,11 @@ export function BookingDemo({ client, theme }: BookingDemoProps) {
           customerName={confirmed.contact.name}
           customerPhone={confirmed.contact.phone}
           summary={confirmed.summary}
+          photoCount={confirmed.photoCount}
+          startLabel={formatClock(confirmed.booking.start)}
+          onViewDashboard={() =>
+            navigate(`/demo/${client.slug}/owner`, { state: { newBooking: confirmed.booking } })
+          }
           brandStyle={brandStyle(theme)}
         />
       )}

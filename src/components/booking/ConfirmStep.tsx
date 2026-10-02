@@ -1,6 +1,7 @@
 import { Button, Card, FieldError, Input, Label, Separator, TextField } from '@heroui/react'
-import { Calendar, Clock, Lock, Mail, MapPin, Phone, User } from 'lucide-react'
+import { Calendar, Clock, CreditCard, Lock, Mail, MapPin, Phone, User } from 'lucide-react'
 import { DEPOSIT_AMOUNT, formatCurrency, formatHours, formatQuoteTotal } from '../../lib/booking'
+import { PhotoUpload } from './PhotoUpload'
 
 export interface ContactInfo {
   name: string
@@ -13,7 +14,9 @@ export interface BookingSummary {
   addonNames: string[]
   address: string
   when: string
+  /** Includes the travel fee. */
   totalPrice: number
+  travelFee: number
   /** Some of the booking is priced by quote. */
   hasQuotedItems: boolean
   totalHours: number
@@ -23,6 +26,8 @@ interface ConfirmStepProps {
   contact: ContactInfo
   onContactChange: (contact: ContactInfo) => void
   summary: BookingSummary
+  photos: File[]
+  onPhotosChange: (photos: File[]) => void
   isSubmitting: boolean
   onSubmit: () => void
 }
@@ -49,6 +54,8 @@ export function ConfirmStep({
   contact,
   onContactChange,
   summary,
+  photos,
+  onPhotosChange,
   isSubmitting,
   onSubmit,
 }: ConfirmStepProps) {
@@ -93,6 +100,8 @@ export function ConfirmStep({
           autoComplete="email"
           placeholder="you@example.com"
         />
+        <PhotoUpload photos={photos} onChange={onPhotosChange} />
+        <DepositCard />
       </div>
 
       <Card className="h-fit">
@@ -112,6 +121,12 @@ export function ConfirmStep({
           </SummaryLine>
           <SummaryLine icon={<MapPin className="size-4" />}>{summary.address}</SummaryLine>
           <Separator />
+          {summary.travelFee > 0 && (
+            <div className="flex justify-between">
+              <span className="text-muted">Travel fee</span>
+              <span>{formatCurrency(summary.travelFee)}</span>
+            </div>
+          )}
           <div className="flex justify-between">
             <span className="text-muted">Estimated total</span>
             <span className="font-semibold">{formatQuoteTotal(summary)}</span>
@@ -166,6 +181,39 @@ function ContactField({ label, icon, value, onChange, error, type, autoComplete,
       <Input autoComplete={autoComplete} placeholder={placeholder} />
       <FieldError>{error}</FieldError>
     </TextField>
+  )
+}
+
+/** Stripe-style card fields, pre-filled with Stripe's test card. Nothing is charged in the demo. */
+function DepositCard() {
+  return (
+    <fieldset className="flex flex-col gap-3 rounded-2xl border border-border bg-surface-secondary p-4">
+      <legend className="sr-only">Deposit payment</legend>
+      <p className="flex items-center justify-between gap-2 text-sm font-medium">
+        <span className="flex items-center gap-1.5">
+          <CreditCard className="size-4 text-[var(--brand-accent)]" aria-hidden="true" />
+          {formatCurrency(DEPOSIT_AMOUNT)} deposit
+        </span>
+        <span className="flex items-center gap-1 text-xs font-normal text-muted">
+          <Lock className="size-3" aria-hidden="true" /> Secured by Stripe
+        </span>
+      </p>
+      <TextField fullWidth defaultValue="4242 4242 4242 4242">
+        <Label>Card number</Label>
+        <Input inputMode="numeric" autoComplete="off" />
+      </TextField>
+      <div className="grid grid-cols-2 gap-3">
+        <TextField defaultValue="12 / 29">
+          <Label>Expiry</Label>
+          <Input inputMode="numeric" autoComplete="off" />
+        </TextField>
+        <TextField defaultValue="123">
+          <Label>CVC</Label>
+          <Input inputMode="numeric" autoComplete="off" />
+        </TextField>
+      </div>
+      <p className="text-xs text-muted">Demo mode: no card is charged.</p>
+    </fieldset>
   )
 }
 

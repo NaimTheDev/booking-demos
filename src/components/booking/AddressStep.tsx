@@ -2,16 +2,18 @@ import { Alert, Chip, Description, Input, Label, TextField } from '@heroui/react
 import { AnimatePresence, motion } from 'framer-motion'
 import { MapPin, ShieldAlert, Truck } from 'lucide-react'
 import type { ClientConfig } from '../../data/clients'
-import type { AddressStatus } from '../../lib/booking'
+import { formatCurrency, type AddressStatus } from '../../lib/booking'
 
 interface AddressStepProps {
   client: ClientConfig
   address: string
   onAddressChange: (value: string) => void
   status: AddressStatus
+  /** Fee added to the total when the address is outside the free zones. */
+  travelFee: number
 }
 
-export function AddressStep({ client, address, onAddressChange, status }: AddressStepProps) {
+export function AddressStep({ client, address, onAddressChange, status, travelFee }: AddressStepProps) {
   return (
     <div className="flex flex-col gap-5">
       <TextField fullWidth value={address} onChange={onAddressChange} autoFocus>
@@ -56,8 +58,8 @@ export function AddressStep({ client, address, onAddressChange, status }: Addres
               <Alert.Content>
                 <Alert.Title>Just outside our free radius</Alert.Title>
                 <Alert.Description>
-                  You can still book — a small travel fee will be confirmed by text before your
-                  appointment.
+                  You can still book — a {formatCurrency(travelFee)} travel fee has been added to your
+                  total.
                 </Alert.Description>
               </Alert.Content>
             </Alert>

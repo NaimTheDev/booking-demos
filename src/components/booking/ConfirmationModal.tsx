@@ -1,6 +1,6 @@
 import { Button, Modal } from '@heroui/react'
 import { motion } from 'framer-motion'
-import { CheckCircle, MessageSquareText } from 'lucide-react'
+import { ArrowRight, CheckCircle, MessageSquareText } from 'lucide-react'
 import type { CSSProperties } from 'react'
 import { DEPOSIT_AMOUNT, formatCurrency } from '../../lib/booking'
 import type { BookingSummary } from './ConfirmStep'
@@ -13,6 +13,10 @@ interface ConfirmationModalProps {
   customerName: string
   customerPhone: string
   summary: BookingSummary
+  photoCount: number
+  /** When the slot starts, e.g. "8:00 AM", for the day-of text. */
+  startLabel: string
+  onViewDashboard: () => void
   brandStyle: CSSProperties
 }
 
@@ -24,9 +28,28 @@ export function ConfirmationModal({
   customerName,
   customerPhone,
   summary,
+  photoCount,
+  startLabel,
+  onViewDashboard,
   brandStyle,
 }: ConfirmationModalProps) {
   const firstName = customerName.trim().split(/\s+/)[0]
+  const messages = [
+    {
+      when: 'Now',
+      text: `Hi ${firstName}! Your ${businessName} appointment is locked in for ${summary.when}.${
+        photoCount > 0 ? ` We got your ${photoCount} photo${photoCount === 1 ? '' : 's'}.` : ''
+      } Reply C to confirm or R to reschedule.`,
+    },
+    {
+      when: '24 hours before',
+      text: `Reminder: ${businessName} tomorrow at ${startLabel}. Need to change it? Reply R and we'll send new times.`,
+    },
+    {
+      when: '2 hours before',
+      text: `${businessName} here, see you at ${startLabel}! Reply if anything's changed.`,
+    },
+  ]
 
   return (
     <Modal>
@@ -55,19 +78,40 @@ export function ConfirmationModal({
                     <p className="font-semibold">{summary.serviceName}</p>
                     <p className="text-muted">{summary.when}</p>
                     <p className="mt-2 text-muted">
+                      {summary.travelFee > 0 && `Includes ${formatCurrency(summary.travelFee)} travel fee · `}
                       {formatCurrency(DEPOSIT_AMOUNT)} deposit received ·{' '}
                       {summary.hasQuotedItems
                         ? 'remaining balance quoted before service'
                         : `${formatCurrency(Math.max(summary.totalPrice - DEPOSIT_AMOUNT, 0))} due at service`}
                     </p>
                   </div>
-                  <div className="flex gap-3 rounded-2xl border border-border p-4 text-sm">
-                    <MessageSquareText className="size-5 shrink-0 text-[var(--brand-accent)]" aria-hidden="true" />
-                    <p>
-                      <span className="block text-xs text-muted">SMS to {customerPhone}</span>
-                      Hi {firstName}! Your {businessName} appointment is locked in for {summary.when}. Reply C to confirm or R to reschedule.
+                  <div className="rounded-2xl border border-border p-4 text-sm">
+                    <p className="mb-3 flex items-center gap-2 text-xs text-muted">
+                      <MessageSquareText className="size-4 text-[var(--brand-accent)]" aria-hidden="true" />
+                      Texts to {customerPhone}
                     </p>
+                    <ol className="flex flex-col gap-3">
+                      {messages.map((m) => (
+                        <li key={m.when} className="flex flex-col gap-1">
+                          <span className="brand-label text-[11px]">{m.when}</span>
+                          <span className="w-fit max-w-[90%] rounded-2xl rounded-tl-sm bg-[var(--brand-primary)] px-3 py-2 text-[var(--brand-fg)]">
+                            {m.text}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
                   </div>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      close()
+                      onViewDashboard()
+                    }}
+                    className="flex items-center justify-center gap-1.5 text-sm font-semibold text-[var(--brand-primary)] underline-offset-4 hover:underline"
+                  >
+                    See it in the owner dashboard
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </button>
                 </Modal.Body>
                 <Modal.Footer className="flex-col gap-2 sm:flex-row">
                   <Button variant="secondary" fullWidth onPress={close}>

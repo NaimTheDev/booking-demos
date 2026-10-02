@@ -85,6 +85,8 @@ export interface ClientConfig {
   services: Service[]
   addons: Addon[]
   freeRadiusZones: string[]
+  /** Charged when the address falls outside the free zones. Defaults to `TRAVEL_FEE`. */
+  travelFee?: number
 }
 
 /*
