@@ -23,3 +23,7 @@ dist-ssr
 *.sln
 *.sw?
 .playwright-mcp/
+
+# Private business notes (repo is public)
+PRICING.md
+COMPETITORS.md
