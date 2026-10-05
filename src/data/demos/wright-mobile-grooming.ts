@@ -1,0 +1,108 @@
+import type { DemoEntry } from '../demo-entry'
+
+// wrightmobilegrooming.com — /prices ("starts at" by breed size, doodles, bath only, cats), /services, /contactform.
+// "Request Service" is a form; clients are "contacted only if an opening is available in your area".
+// Theme follows the Squarespace site: white header, Manrope/Poppins, square grey/black buttons,
+// green "Call or Text" phone and pink script URL over the hero photo.
+export default {
+  client: {
+    slug: 'wright-mobile-grooming',
+    name: 'The Wright Mobile Grooming',
+    tagline: 'Mobile grooming at your front door — full service grooms for dogs and cats.',
+    location: 'Toledo, OH',
+    region: 'northwest-ohio',
+    address: 'Toledo, OH',
+    primaryColor: '#111111',
+    accentColor: '#E5157F',
+    vertical: 'pet',
+    sizeTiers: {
+      pet: {
+        label: 'Pet size',
+        tiers: [
+          { id: 'small', label: 'Small breed', hoursMultiplier: 1 },
+          { id: 'medium', label: 'Medium breed', hoursMultiplier: 1.2 },
+          { id: 'large', label: 'Large / XL breed', hoursMultiplier: 1.4 },
+        ],
+      },
+    },
+    services: [
+      {
+        id: 'wmg-cut',
+        name: 'Bath & Cut',
+        price: 110,
+        priceBySize: { small: 110, medium: 140, large: 150 },
+        startingAt: true,
+        durationHours: 2,
+        description: 'Full spa service: bath, conditioning, brushing, haircut, nail filing, ears and teeth.',
+        popular: true,
+      },
+      {
+        id: 'wmg-doodle',
+        name: 'Doodle Groom',
+        price: 110,
+        priceBySize: { small: 110, medium: 140, large: 180 },
+        startingAt: true,
+        durationHours: 2.5,
+        description: 'Full groom for doodles. Final price depends on coat condition and behavior.',
+      },
+      {
+        id: 'wmg-bath',
+        name: 'Bath Only',
+        price: 95,
+        priceBySize: { small: 95, medium: 95, large: 110 },
+        startingAt: true,
+        durationHours: 1.5,
+        description: 'Bath, brush-out, nails and ears without a haircut.',
+      },
+      {
+        id: 'wmg-cat',
+        name: 'Cat Groom',
+        price: 130,
+        startingAt: true,
+        durationHours: 1.5,
+        description: 'Bath, brushing, lion cuts, nails, ears, sanitary and dental care. Cats are booked every 12 weeks.',
+      },
+    ],
+    addons: [],
+    freeRadiusZones: ['Toledo', 'Sylvania', 'Holland', 'Perrysburg', 'Maumee', 'Monclova', 'Temperance', 'Lambertville', 'Waterville'],
+  },
+  theme: {
+    googleFonts: ['Manrope:wght@500;600;700', 'Poppins:wght@400;500;600', 'Kalam:wght@700'],
+    mode: 'light',
+    display: { font: 'Manrope', weight: 600, tracking: '-0.02em', color: '#FFFFFF' },
+    heading: { font: 'Manrope', weight: 600, tracking: '-0.01em', color: '#111111' },
+    body: { font: 'Poppins' },
+    label: { font: 'Poppins', weight: 500, tracking: '0.02em', color: '#555555' },
+    radius: 0,
+    colors: {
+      page: '#FFFFFF',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F3F3F3',
+      text: '#111111',
+      muted: '#666666',
+      border: '#E2E2E2',
+      brand: '#111111',
+      brandFg: '#FFFFFF',
+      accent: '#3DAA3A',
+    },
+    button: { bg: '#000000', fg: '#FFFFFF', radius: 0, weight: 400, font: 'Poppins' },
+    hero: {
+      nav: {
+        bg: '#FFFFFF',
+        fg: '#000000',
+        wordmark: 'The Wright Mobile Grooming',
+        action: { label: 'Request Service', href: '#booking', style: 'button', color: '#D9D9D9' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), linear-gradient(120deg, #3f88b5 0%, #7a6a55 45%, #3a2c22 100%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      eyebrow: { text: 'Call or Text 419-277-0799', style: 'script', font: 'Kalam', color: '#4CC34A' },
+      headline: 'Mobile grooming at your front door.',
+      subline: 'WrightMobileGrooming.com',
+      sub: 'Toledo, Sylvania, Perrysburg, Maumee & nearby. See your price, pick a day on our route, and you’re on the schedule — no waiting to hear back about an opening.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

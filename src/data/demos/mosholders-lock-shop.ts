@@ -1,0 +1,71 @@
+import type { DemoEntry } from '../demo-entry'
+
+// mosholderslockshop.com — WordPress: centered padlock logo (black + amber) on white, black nav bar,
+// darkened photo hero with a large light Open Sans headline, square black "CALL NOW" button with amber text.
+// Phone or a basic contact form only; no prices are published.
+export default {
+  client: {
+    slug: 'mosholders-lock-shop',
+    name: "Mosholder's Lock Shop",
+    tagline: 'Providing expert locksmith services since 1972 — family owned, 24-hour mobile service.',
+    location: 'Newark, OH',
+    region: 'central-ohio',
+    address: '122 Union St, Newark, OH 43055',
+    logo: { src: '/logos/mosholders-lock-shop.png', background: '#FFFFFF' },
+    primaryColor: '#D9890B',
+    accentColor: '#000000',
+    vertical: 'locksmith',
+    services: [
+      { id: 'ml-car-lockout', name: 'Vehicle Lockout', price: null, durationHours: 0.5, description: 'Locked out of your car? 24-hour mobile service ready to respond.', popular: true },
+      { id: 'ml-home-lockout', name: 'Home Lockout', price: null, durationHours: 0.5, description: 'Residential lockouts, any time of day.' },
+      { id: 'ml-rekey', name: 'Rekeying', price: null, durationHours: 1, description: 'Rekey every lock in the house — perfect after a move.' },
+      { id: 'ml-lock-change', name: 'Lock Change / Installation', price: null, durationHours: 1.5, description: 'Change all of the locks on your home or business.' },
+      { id: 'ml-transponder', name: 'Transponder & Car Keys', price: null, durationHours: 1, description: 'Transponder keys and vehicle anti-theft (VATS) keys.' },
+      { id: 'ml-safe', name: 'Safe Opening & Combination Change', price: null, durationHours: 1, description: 'Combination and electronic safes and vaults.' },
+      { id: 'ml-commercial', name: 'Commercial Locksmith', price: null, durationHours: 1.5, description: 'Locks and keys for businesses throughout Licking County.' },
+    ],
+    addons: [],
+    freeRadiusZones: [
+      'Newark', 'Heath', 'Granville', 'Hebron', 'Alexandria', 'Buckeye Lake', 'Etna', 'Pataskala', 'Utica', 'Hanover', 'Gratiot',
+      'Mount Vernon', 'Centerburg', 'Danville', 'Fredericktown', 'Gambier', 'Frazeysburg', 'Glenford', '43055', '43056',
+    ],
+  },
+  theme: {
+    googleFonts: ['Open+Sans:wght@300;400;600;700'],
+    mode: 'light',
+    display: { font: '"Open Sans"', weight: 400, color: '#FFFFFF' },
+    heading: { font: '"Open Sans"', weight: 700, color: '#000000' },
+    body: { font: '"Open Sans"' },
+    label: { font: '"Open Sans"', weight: 600, case: 'uppercase', tracking: '0.08em', color: '#333333' },
+    radius: 0,
+    colors: {
+      page: '#EEEEEE',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F2F5F8',
+      text: '#000000',
+      muted: '#555555',
+      border: '#DDDDDD',
+      brand: '#D9890B',
+      brandFg: '#000000',
+      accent: '#D9890B',
+    },
+    button: { bg: '#000000', fg: '#F6B754', radius: 0, weight: 600, font: '"Open Sans"' },
+    hero: {
+      topBar: { bg: '#000000', fg: '#D9890B', items: ['24 Hour Service Available', 'Call 740-344-4711'], align: 'center' },
+      nav: {
+        bg: '#FFFFFF',
+        fg: '#000000',
+        logoSize: 'lg',
+        action: { label: 'Call Now', href: 'tel:7403444711', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(40,40,40,0.6), rgba(40,40,40,0.6)), linear-gradient(120deg, #c9c4bb 0%, #8f8a84 40%, #6f6a66 70%, #a39b93 100%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      headline: 'Providing Expert Locksmith Services Since 1972.',
+      sub: 'Locksmith services throughout the Licking & Knox County area. Book a rekey or lock change — or call for an emergency.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

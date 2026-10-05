@@ -1,0 +1,66 @@
+import type { DemoEntry } from '../demo-entry'
+
+// richardsmobiledetailing.com — GoDaddy one-pager: near-black background, Playfair Display title, Open Sans body,
+// red-car logo in a maroon frame, white outline pill "SCHEDULE YOUR DETAILING" button that only dials the phone.
+// No services or prices published, so the demo lists the basic detail packages as quotes.
+export default {
+  client: {
+    slug: 'richards-mobile-detailing',
+    name: 'Richards Mobile Detailing',
+    tagline: "When u think it won't it'll Buff",
+    location: 'Lebanon, OH',
+    region: 'southwest-ohio',
+    address: 'Lebanon, OH',
+    logo: { src: '/logos/richards-mobile-detailing.jpg', background: '#161616' },
+    primaryColor: '#B10F14',
+    accentColor: '#800000',
+    vertical: 'auto',
+    services: [
+      { id: 'rmd-full', name: 'Full Detail (Interior + Exterior)', price: null, durationHours: 4, description: 'Complete interior and exterior cleaning and restoration.', popular: true },
+      { id: 'rmd-interior', name: 'Interior Detail', price: null, durationHours: 2.5, description: 'Vacuum, wipe-down and deep clean of the cabin.' },
+      { id: 'rmd-exterior', name: 'Exterior Detail & Polish', price: null, durationHours: 2.5, description: 'Hand wash, polish and protection for a spotless finish.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['Lebanon'],
+  },
+  theme: {
+    googleFonts: ['Playfair+Display:wght@400;700', 'Open+Sans:wght@400;600;700'],
+    mode: 'dark',
+    display: { font: '"Playfair Display"', weight: 400, color: '#F7F7F7' },
+    heading: { font: '"Open Sans"', weight: 600, case: 'uppercase', tracking: '0.08em', color: '#F7F7F7' },
+    body: { font: '"Open Sans"' },
+    label: { font: '"Open Sans"', weight: 700, case: 'uppercase', tracking: '0.1em', color: '#A4A4A4' },
+    radius: 8,
+    colors: {
+      page: '#161616',
+      surface: '#1F1F1F',
+      surfaceAlt: '#2A2A2A',
+      text: '#F7F7F7',
+      muted: '#A4A4A4',
+      border: '#3A3A3A',
+      brand: '#B10F14',
+      brandFg: '#FFFFFF',
+      accent: '#E0262C',
+    },
+    button: { bg: '#800000', fg: '#F7F7F7', radius: 48, case: 'uppercase', tracking: '0.08em', weight: 700, font: '"Open Sans"' },
+    hero: {
+      nav: {
+        bg: '#161616',
+        fg: '#F7F7F7',
+        wordmark: 'Richards Mobile Detailing',
+        action: { label: '513-382-6117', href: 'tel:5133826117', style: 'outline' },
+      },
+      layout: 'banner',
+      background: '#161616',
+      fg: '#F7F7F7',
+      align: 'center',
+      headline: 'Richards Mobile Detailing',
+      subline: 'Premium Auto Detailing Services',
+      sub: 'Expert car cleaning & polishing for a spotless finish. Pick a detail and a time — no phone tag.',
+      ornament: 'frame',
+      ornamentColor: '#800000',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

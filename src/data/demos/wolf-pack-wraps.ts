@@ -1,0 +1,71 @@
+import type { DemoEntry } from '../demo-entry'
+
+// instagram.com/wolfpackwraps — no website; bio lists the services and says "DM for scheduling".
+// No prices are published, so every service is a custom quote. Theme follows the logo:
+// grey badge, black wolf with red slashes, script wordmark.
+export default {
+  client: {
+    slug: 'wolf-pack-wraps',
+    name: 'Wolf Pack Wraps',
+    tagline: 'Car Wrapping and Auto Reconditioning',
+    location: 'Columbus, OH',
+    region: 'central-ohio',
+    address: 'Columbus, OH',
+    logo: { src: '/logos/wolf-pack-wraps.jpg', background: '#C9C9C9' },
+    primaryColor: '#C8102E',
+    accentColor: '#1A1A1A',
+    vertical: 'tint',
+    services: [
+      { id: 'wp-wrap', name: 'Full Vehicle Wrap', price: null, durationHours: 16, description: 'Color-change vinyl wrap. Custom quote by vehicle and film.', popular: true },
+      { id: 'wp-partial', name: 'Partial Wrap / Accents', price: null, durationHours: 4, description: 'Roof, hood, mirrors, chrome delete and accents.' },
+      { id: 'wp-ppf', name: 'Paint Protection Film', price: null, durationHours: 8, description: 'Clear PPF installation — front end or full coverage.' },
+      { id: 'wp-tint', name: 'Window Tinting', price: null, durationHours: 2, description: 'Automotive window tint.' },
+      { id: 'wp-ceramic', name: 'Ceramic Coating', price: null, durationHours: 8, description: 'Ceramic coating for paint protection and gloss.' },
+      { id: 'wp-recon', name: 'Auto Reconditioning / Detailing', price: null, durationHours: 4, description: 'Interior and exterior reconditioning.' },
+    ],
+    addons: [{ id: 'wp-headlights', name: 'Headlight Restoration', price: null, addedHours: 1 }],
+    freeRadiusZones: ['Columbus', 'Hilliard', 'Grove City', 'Dublin', 'Westerville', 'Gahanna', 'Reynoldsburg', 'Whitehall', 'Upper Arlington'],
+  },
+  theme: {
+    googleFonts: ['Oswald:wght@500;700', 'Inter:wght@400;600', 'Great+Vibes'],
+    mode: 'dark',
+    display: { font: 'Oswald', weight: 700, case: 'uppercase', tracking: '0.02em', color: '#FFFFFF' },
+    heading: { font: 'Oswald', weight: 500, case: 'uppercase', tracking: '0.03em', color: '#F2F2F2' },
+    body: { font: 'Inter' },
+    label: { font: 'Inter', weight: 600, case: 'uppercase', tracking: '0.12em', color: '#A3A3A3' },
+    radius: 6,
+    colors: {
+      page: '#121212',
+      surface: '#1C1C1C',
+      surfaceAlt: '#262626',
+      text: '#F2F2F2',
+      muted: '#A3A3A3',
+      border: '#333333',
+      brand: '#C8102E',
+      brandFg: '#FFFFFF',
+      accent: '#E0313F',
+    },
+    button: { bg: '#C8102E', fg: '#FFFFFF', radius: 6, case: 'uppercase', tracking: '0.08em', weight: 600, font: 'Oswald' },
+    hero: {
+      nav: {
+        bg: '#0B0B0B',
+        fg: '#FFFFFF',
+        wordmark: 'Wolf Pack Wraps',
+        logoSize: 'lg',
+        action: { label: 'Call 614-900-4788', href: 'tel:6149004788', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'radial-gradient(circle at 50% 0%, #3a0d12 0%, #161616 55%, #0b0b0b 100%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      eyebrow: { text: 'Wolf Pack Wraps', style: 'script', font: 'Great Vibes', color: '#C9C9C9' },
+      headline: 'Wraps, Tint, PPF',
+      highlight: '& Ceramic Coating',
+      highlightColor: '#E0313F',
+      highlightOnNewLine: true,
+      sub: 'Columbus car wrapping and auto reconditioning. Skip the DMs — pick a service and request your spot below.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

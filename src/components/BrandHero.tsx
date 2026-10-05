@@ -55,7 +55,7 @@ function TopBar({ topBar }: { topBar: NonNullable<HeroConfig['topBar']> }) {
 function LogoMark({ client, theme, className }: { client: ClientConfig; theme: ClientTheme; className?: string }) {
   const { nav } = theme.hero
   if (nav.wordmark && client.logo) {
-    // Small badge logo beside a text wordmark (e.g. SpaShine).
+    // Small badge logo beside a text wordmark.
     return (
       <span className="flex items-center gap-2.5">
         <img

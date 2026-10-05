@@ -1,3 +1,5 @@
+import type { DemoEntry } from './demo-entry'
+
 export type Vertical =
   | 'auto'
   | 'marine'
@@ -10,7 +12,7 @@ export type Vertical =
   | 'locksmith'
   | 'multi'
 
-export type Region = 'northeast-ohio' | 'central-ohio'
+export type Region = 'northeast-ohio' | 'northwest-ohio' | 'central-ohio' | 'southwest-ohio' | 'southeast-ohio'
 
 /** A concrete service category. Multi-vertical clients tag each service with one. */
 export type ServiceCategory = Exclude<Vertical, 'multi'>
@@ -94,7 +96,7 @@ export interface ClientConfig {
  * (sitemap service pages). `price: null` means the site doesn't publish a price.
  * Durations are only published by a few sites; the rest are estimates.
  */
-export const clients: ClientConfig[] = [
+const baseClients: ClientConfig[] = [
   {
     // gkspolishing.com: /detailing/automotive/, /ceramic-coatings/automotive/, /detailing/boats/, /hardsurface/
     slug: 'gks',
@@ -404,82 +406,6 @@ export const clients: ClientConfig[] = [
     freeRadiusZones: [
       'Cleveland', 'Lakewood', 'Rocky River', 'Bay Village', 'Westlake', 'Avon', 'Avon Lake', 'Parma',
       'Brunswick', 'Brook Park', 'North Olmsted', 'Olmsted Falls', 'Berea', 'Strongsville', 'Middleburg Heights',
-    ],
-  },
-  {
-    // sureshinemarinedetailing.com: /services (no prices published)
-    slug: 'sure-shine',
-    name: 'Sure Shine Marine Detailing',
-    tagline: 'Keeping Lake Erie hulls glossy from launch to haul-out.',
-    location: 'Catawba to Mentor, OH',
-    region: 'northeast-ohio',
-    address: '2185 S Emerald Shores Dr, Lakeside Marblehead, OH 43440',
-    primaryColor: '#0A0E11',
-    accentColor: '#35E0C9',
-    vertical: 'multi',
-    services: [
-      {
-        id: 'ss-ceramic',
-        name: 'Marine Ceramic Coating',
-        price: null,
-        durationHours: 8,
-        description: 'Starke-certified ceramic that forms a hard, semi-permanent barrier. Applied in our warehouse.',
-        category: 'marine',
-        popular: true,
-      },
-      {
-        id: 'ss-wash',
-        name: 'Wash Package (Weekly / Bi-Weekly)',
-        price: null,
-        durationHours: 2,
-        description: 'Recurring wash plans. Regular weekly clients save 5%.',
-        category: 'marine',
-      },
-      {
-        id: 'ss-compound',
-        name: 'Compounding & Wax',
-        price: null,
-        durationHours: 6,
-        description: 'Cut oxidation and restore gloss, then protect with wax.',
-        category: 'marine',
-      },
-      {
-        id: 'ss-wet-sand',
-        name: 'Wet Sanding',
-        price: null,
-        durationHours: 8,
-        description: 'Wet sand heavily oxidized or damaged gelcoat before polishing.',
-        category: 'marine',
-      },
-      {
-        id: 'ss-bottom',
-        name: 'Bottom Painting',
-        price: null,
-        durationHours: 6,
-        description: 'Prep and bottom paint to protect the hull below the waterline.',
-        category: 'marine',
-      },
-      {
-        id: 'ss-teak',
-        name: 'Teak Finishing & Restoration',
-        price: null,
-        durationHours: 4,
-        description: 'Clean, brighten and refinish teak decks and trim.',
-        category: 'marine',
-      },
-      {
-        id: 'ss-rv-auto',
-        name: 'RV & Auto Detailing',
-        price: null,
-        durationHours: 4,
-        description: 'RVs, cars and trucks — the same detail-oriented attention, on land.',
-        category: 'auto',
-      },
-    ],
-    addons: [],
-    freeRadiusZones: [
-      'Catawba Island', 'Marblehead', 'Vermilion', 'Avon Lake', 'Bay Village', 'Westlake', 'Rocky River',
-      'Roaming Shores', '43440',
     ],
   },
   {
@@ -1114,80 +1040,6 @@ export const clients: ClientConfig[] = [
     freeRadiusZones: ['43017', '43065', '43054', 'Dublin', 'Powell', 'New Albany', 'Westerville', 'Columbus'],
   },
   {
-    // spashine.net (client-rendered; prices read from its app bundle): services, add-ons, maintenance plans
-    slug: 'spashine',
-    name: 'SpaShine Detailing',
-    tagline: 'Mobile Car Detailing in Columbus, Ohio',
-    location: 'Columbus, OH (We Come To You)',
-    region: 'central-ohio',
-    address: 'Upper Arlington, OH',
-    logo: { src: '/logos/spashine.png', background: '#FFFFFF' },
-    primaryColor: '#1F9EF9',
-    accentColor: '#161D27',
-    vertical: 'auto',
-    sizeTiers: {
-      auto: {
-        label: 'Vehicle size',
-        tiers: [
-          { id: 'sedan', label: 'Sedan', hoursMultiplier: 1 },
-          { id: 'suv', label: 'SUV', hoursMultiplier: 1.1 },
-          { id: 'truck', label: 'Truck', hoursMultiplier: 1.2 },
-          { id: 'three-row', label: '3-Row SUV / Van', hoursMultiplier: 1.25 },
-        ],
-      },
-    },
-    services: [
-      {
-        id: 'ss-essential',
-        name: 'Essential Clean',
-        price: 225,
-        priceBySize: { sedan: 225, suv: 250, truck: 275, 'three-row': 300 },
-        durationHours: 2,
-        description: 'Our essential interior and exterior clean — about 2 hours.',
-      },
-      {
-        id: 'ss-full',
-        name: 'Full Detail',
-        price: 250,
-        priceBySize: { sedan: 250, suv: 275, truck: 300, 'three-row': 325 },
-        durationHours: 2.5,
-        description: 'Full interior and exterior detail, carpet shampoo/extraction and steam included — about 2 to 2.5 hours.',
-        popular: true,
-      },
-      {
-        id: 'ss-maintenance',
-        name: 'Maintenance Plan (monthly)',
-        price: 150,
-        priceBySize: { sedan: 150, suv: 200, truck: 230, 'three-row': 230 },
-        durationHours: 2,
-        description: 'Recurring monthly care, priced per month by vehicle size.',
-      },
-      {
-        id: 'ss-ceramic',
-        name: 'Ceramic Coating (5- or 10-year)',
-        price: null,
-        durationHours: 8,
-        description: '5-year, 10-year, or paint correction plus ceramic. Custom quote.',
-      },
-    ],
-    addons: [
-      { id: 'ss-engine', name: 'Engine Bay', price: 49, addedHours: 0.5 },
-      { id: 'ss-pet-hair', name: 'Pet Hair', price: 40, startingAt: true, addedHours: 0.5 },
-      { id: 'ss-odor', name: 'Odor Removal', price: 49, addedHours: 0.5 },
-      { id: 'ss-carpet', name: 'Carpet Shampoo/Extraction + Steam', price: 65, startingAt: true, addedHours: 0.5 },
-      { id: 'ss-seats', name: 'Seat Shampoo / Deep Extraction', price: 120, addedHours: 1 },
-      { id: 'ss-decon', name: 'Paint Decontamination', price: 49, addedHours: 0.5 },
-      { id: 'ss-headlights', name: 'Headlight Restoration (pair)', price: 120, addedHours: 1 },
-      { id: 'ss-transfer', name: 'Paint Transfer Removal', price: 75, startingAt: true, addedHours: 0.5 },
-      { id: 'ss-enhancement', name: 'One-Step Paint Enhancement', price: 300, startingAt: true, addedHours: 3 },
-      { id: 'ss-sealant', name: '6-Month Ceramic Sealant', price: 49, addedHours: 0.5 },
-    ],
-    freeRadiusZones: [
-      'Columbus', 'Upper Arlington', 'Dublin', 'Powell', 'New Albany', 'Bexley', 'Grandview Heights', 'Worthington',
-      'Westerville',
-    ],
-  },
-  {
     // mhautodetail.com: /ceramic-coating, /paint-correction, /interior-and-exterior-detailing
     slug: 'mh-auto',
     name: 'MH Auto Detailing',
@@ -1248,39 +1100,6 @@ export const clients: ClientConfig[] = [
     ],
     addons: [],
     freeRadiusZones: ['Columbus', 'Dublin', 'Hilliard', 'Grove City', 'Gahanna', 'Westerville', 'Worthington', 'Reynoldsburg'],
-  },
-  {
-    // furballfitnesspetcare.com: /grooming-spa (mobile BarkBath prices; Mon–Fri, bath and nails only)
-    slug: 'furball-fitness',
-    name: 'Furball Fitness',
-    tagline: 'Full-Service Grooming at Our Spa Plus Mobile Baths & Nail Trims',
-    location: 'Reynoldsburg / Columbus, OH',
-    region: 'central-ohio',
-    address: '6885 Taylor Rd SW, Reynoldsburg, OH 43068',
-    logo: { src: '/logos/furball-fitness.png', background: '#FFFFFF' },
-    primaryColor: '#BE1724',
-    accentColor: '#EFECC2',
-    vertical: 'pet',
-    services: [
-      {
-        id: 'ff-barkbath',
-        name: 'Mobile Bath (BarkBath)',
-        price: 45,
-        startingAt: true,
-        durationHours: 1,
-        description: 'Bath with brushing plus a nail trim or Dremel, per pet. No haircuts. +$2/mile each way beyond 10 miles.',
-        popular: true,
-      },
-      { id: 'ff-nail-trim', name: 'Mobile Toe Nail Trim', price: 25, durationHours: 0.5, description: 'Nail trim at your door, per pet.' },
-      { id: 'ff-dremel', name: 'Mobile Dremel', price: 30, durationHours: 0.5, description: 'Nails filed smooth with a Dremel, per pet.' },
-      { id: 'ff-brush-nails', name: 'Brushing & Nail Trim', price: 40, durationHours: 0.5, description: 'Brush-out plus nail trim, per pet.' },
-      { id: 'ff-brush-dremel', name: 'Brushing & Dremel', price: 45, durationHours: 0.5, description: 'Brush-out plus Dremel, per pet.' },
-    ],
-    addons: [{ id: 'ff-butter-mask', name: 'Paw & Nose Butter Mask', price: 15, addedHours: 0 }],
-    freeRadiusZones: [
-      '43068', 'Reynoldsburg', 'Columbus', 'Gahanna', 'New Albany', 'Whitehall', 'Bexley', 'Pickerington', 'Westerville',
-      'Pataskala', 'Clintonville', 'Upper Arlington',
-    ],
   },
   {
     // columbusohiotint.com: homepage + service pages (film tiers listed; no prices published)
@@ -1427,6 +1246,15 @@ export const clients: ClientConfig[] = [
     ],
   },
 ]
+
+/*
+ * Newer demos live one per file in ./demos (client config + theme together), so adding a
+ * demo never touches this file. See .claude/skills/ohio-leads/SKILL.md.
+ */
+const demoFiles = import.meta.glob<DemoEntry>('./demos/*.ts', { eager: true, import: 'default' })
+export const demoEntries: DemoEntry[] = Object.values(demoFiles)
+
+export const clients: ClientConfig[] = [...baseClients, ...demoEntries.map((entry) => entry.client)]
 
 export function getClientBySlug(slug: string | undefined): ClientConfig | undefined {
   return clients.find((client) => client.slug === slug)

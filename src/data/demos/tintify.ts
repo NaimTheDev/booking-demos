@@ -1,0 +1,76 @@
+import type { DemoEntry } from '../demo-entry'
+
+// tintifywindowtinting.com — WordPress: black slanted logo block, royal-blue (#0057E7) nav bar, condensed
+// uppercase "akrobat" headlines (Barlow Condensed here) over a dark car photo, square blue buttons.
+// "BOOK A CALL" is just a tel: link. No prices published — every service is a quote.
+export default {
+  client: {
+    slug: 'tintify',
+    name: 'Tintify A+ Window Tinting',
+    tagline: 'Premium window tint and PPF in Delaware and Marysville, Ohio — 20+ years of experience',
+    location: 'Delaware & Marysville, OH',
+    region: 'central-ohio',
+    address: '15 W Fountain Ave, Delaware, OH',
+    logo: { src: '/logos/tintify.png', background: '#000000' },
+    primaryColor: '#0057E7',
+    accentColor: '#E3262E',
+    vertical: 'tint',
+    services: [
+      { id: 'tfy-tint', name: 'Automotive Window Tinting', price: null, durationHours: 2.5, description: 'Johnson Window Films — heat, glare and up to 99% UV rejection with a bubble-free finish.', popular: true },
+      { id: 'tfy-ppf', name: 'Paint Protection Film', price: null, durationHours: 8, description: 'Clear PPF against rock chips, scratches and weather damage.' },
+      { id: 'tfy-ceramic', name: 'Ceramic Coating', price: null, durationHours: 6, description: 'Hydrophobic, high-gloss, UV-resistant paint protection.' },
+      { id: 'tfy-correction', name: 'Paint Correction', price: null, durationHours: 6, description: 'Swirl, oxidation and defect removal — ready for PPF or coating.' },
+      { id: 'tfy-chrome', name: 'Chrome Delete', price: null, durationHours: 3, description: 'Chrome trim wrapped in satin or gloss black vinyl.' },
+      { id: 'tfy-detail', name: 'Auto Detailing', price: null, durationHours: 3, description: 'Exterior hand wash and interior deep clean.' },
+      { id: 'tfy-flat', name: 'Residential & Commercial Window Tint', price: null, durationHours: 4, description: 'Glare, heat and UV control for homes, offices and storefronts.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['Delaware', 'Marysville', 'Powell', 'Lewis Center', 'Sunbury', 'Galena', 'Ostrander', 'Plain City', 'Marion', '43015', '43040'],
+  },
+  theme: {
+    googleFonts: ['Barlow+Condensed:wght@400;500;600;700', 'Inter:wght@400;500;600'],
+    mode: 'light',
+    display: { font: '"Barlow Condensed"', weight: 500, case: 'uppercase', tracking: '0.01em' },
+    heading: { font: '"Barlow Condensed"', weight: 600, case: 'uppercase', tracking: '0.02em', color: '#303030' },
+    body: { font: 'Inter' },
+    label: { font: '"Barlow Condensed"', weight: 600, case: 'uppercase', tracking: '0.12em', color: '#0057E7' },
+    radius: 0,
+    colors: {
+      page: '#F2F2F2',
+      surface: '#FFFFFF',
+      surfaceAlt: '#ECECEC',
+      text: '#1A1A1A',
+      muted: '#666666',
+      border: '#D9D9D9',
+      brand: '#0057E7',
+      brandFg: '#FFFFFF',
+      accent: '#0057E7',
+    },
+    button: { bg: '#0057E7', fg: '#FFFFFF', radius: 0, case: 'uppercase', tracking: '0.1em', weight: 700, font: '"Barlow Condensed"' },
+    hero: {
+      topBar: {
+        bg: '#FFFFFF',
+        fg: '#111111',
+        items: ['+1 740-816-2354', 'Mon – Sun 8:30am – 6pm', 'Delaware & Marysville, OH'],
+        align: 'center',
+      },
+      nav: {
+        bg: '#0057E7',
+        fg: '#FFFFFF',
+        logoPlate: '#000000',
+        action: { label: 'Book a Call', href: 'tel:7408162354', style: 'text' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), radial-gradient(ellipse at 60% 70%, #3a3a3a 0%, #0d0d0d 70%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      kicker: 'Welcome to Tintify A+ Window Tinting',
+      headline: 'Premium Window Tint and PPF Solutions in Delaware and Marysville, Ohio',
+      sub: 'Skip the phone call — pick your film or protection package and request your install date.',
+      ornament: 'rule',
+      ornamentColor: '#0057E7',
+      size: 'md',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

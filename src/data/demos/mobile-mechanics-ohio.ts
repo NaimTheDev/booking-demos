@@ -1,0 +1,76 @@
+import type { DemoEntry } from '../demo-entry'
+
+// mobilemechanicsohio.com — Hibu site: thin red/green/blue stripe, white header with the round badge
+// logo, periwinkle (#505EB6) banner, Oswald headings in the same blue, green (#0A891F) square nav button,
+// Source Sans Pro body. "Request Service" opens an unconfigured widget ("The company is not yet
+// configured"), so customers can only call. No prices published.
+export default {
+  client: {
+    slug: 'mobile-mechanics-ohio',
+    name: 'Mobile Mechanics of Ohio',
+    tagline: "Columbus' very first and original mobile auto repair service — since 2001",
+    location: 'Hilliard, OH',
+    region: 'central-ohio',
+    address: 'Hilliard, OH 43026',
+    logo: { src: '/logos/mobile-mechanics-ohio.jpg', background: '#FFFFFF' },
+    primaryColor: '#505EB6',
+    accentColor: '#0A891F',
+    vertical: 'mechanic',
+    services: [
+      { id: 'mmo-brakes', name: 'Brake Repair', price: null, durationHours: 1.5, description: 'Pads, rotors and calipers at your location — quality parts, only what you need.', popular: true },
+      { id: 'mmo-starter', name: 'Starter Repair / Replacement', price: null, durationHours: 1.5, description: 'Full power but no crank? We diagnose and replace starters on site.' },
+      { id: 'mmo-alternator', name: 'Alternator Replacement', price: null, durationHours: 1.5, description: 'Battery light on or dimming lights — alternator testing and replacement.' },
+      { id: 'mmo-suspension', name: 'Suspension, Struts & Shocks', price: null, durationHours: 2.5, description: 'Struts, shocks, axles and suspension components.' },
+      { id: 'mmo-radiator', name: 'Radiator & Cooling', price: null, durationHours: 2, description: 'Radiator replacement and cooling system repair.' },
+      { id: 'mmo-tuneup', name: 'Tune-Up & Timing Belt', price: null, durationHours: 3, description: 'Tune-ups and timing belt replacement.' },
+      { id: 'mmo-body', name: 'Minor Body Work', price: null, durationHours: 2, description: 'Small body repairs at your home or office.' },
+      { id: 'mmo-diag', name: 'Diagnosis / Free Estimate', price: null, durationHours: 0.75, description: 'Describe the issue with year, make and model for a free estimate.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['Hilliard', 'Columbus', 'Dublin', 'Worthington', 'Powell', 'Upper Arlington', 'Grove City', 'Galloway', '43026'],
+  },
+  theme: {
+    googleFonts: ['Oswald:wght@400;500;600', 'Source+Sans+3:wght@400;600;700', 'Gudea:wght@400;700'],
+    mode: 'light',
+    display: { font: 'Oswald', weight: 500, color: '#FFFFFF' },
+    heading: { font: 'Oswald', weight: 400, color: '#505EB6' },
+    body: { font: '"Source Sans 3"' },
+    label: { font: 'Gudea', weight: 700, case: 'uppercase', tracking: '0.06em', color: '#505EB6' },
+    radius: 0,
+    colors: {
+      page: '#EEEEEE',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F5F5F5',
+      text: '#222222',
+      muted: '#666666',
+      border: '#D6D6D6',
+      brand: '#505EB6',
+      brandFg: '#FFFFFF',
+      accent: '#CF3247',
+    },
+    button: { bg: '#0A891F', fg: '#FFFFFF', radius: 0, weight: 400, tracking: '0.03em', font: 'Gudea' },
+    hero: {
+      topBar: {
+        bg: '#FFFFFF',
+        fg: '#666666',
+        items: ['Serving Columbus, Dublin, Hilliard, Worthington, Powell, Upper Arlington, and more!', '614-657-9364'],
+        align: 'between',
+      },
+      nav: {
+        bg: '#FFFFFF',
+        fg: '#666666',
+        borderColor: '#CF3247',
+        logoSize: 'lg',
+        action: { label: '614-657-9364', href: 'tel:6146579364', style: 'button', color: '#0A891F' },
+      },
+      layout: 'banner',
+      background: '#505EB6',
+      fg: '#FFFFFF',
+      align: 'center',
+      headline: 'For Brakes, Starters, Alternators and More',
+      sub: 'Columbus’ original mobile repair service since 2001. Tell us what the car is doing, pick a time and we come to you.',
+      size: 'md',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

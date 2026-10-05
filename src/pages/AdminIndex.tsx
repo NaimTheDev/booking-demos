@@ -6,7 +6,7 @@ import { ClientLogo } from '../components/ClientLogo'
 import { clients, type ClientConfig, type Region } from '../data/clients'
 import { CATEGORY_LABELS, REGION_LABELS, formatCurrency, getCategories, startingPrice } from '../lib/booking'
 
-const REGION_ORDER: Region[] = ['northeast-ohio', 'central-ohio']
+const REGION_ORDER: Region[] = ['northeast-ohio', 'northwest-ohio', 'central-ohio', 'southwest-ohio', 'southeast-ohio']
 
 export function AdminIndex() {
   return (

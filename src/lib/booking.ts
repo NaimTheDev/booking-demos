@@ -22,13 +22,19 @@ const SLOT_STARTS = [8, 10.5, 13.5, 15]
 
 /** ZIP prefixes treated as "generic local" for a region when a client's zone list doesn't match. */
 const LOCAL_ZIP_PREFIXES: Record<Region, string[]> = {
-  'northeast-ohio': ['440', '441', '442', '443'],
-  'central-ohio': ['430', '431', '432'],
+  'northeast-ohio': ['440', '441', '442', '443', '444', '445', '446', '447', '448', '449'],
+  'northwest-ohio': ['434', '435', '436', '458'],
+  'central-ohio': ['430', '431', '432', '433'],
+  'southwest-ohio': ['450', '451', '452', '453', '454', '455'],
+  'southeast-ohio': ['437', '438', '439', '456', '457'],
 }
 
 export const REGION_LABELS: Record<Region, string> = {
   'northeast-ohio': 'Northeast Ohio',
+  'northwest-ohio': 'Toledo / Northwest Ohio',
   'central-ohio': 'Columbus / Central Ohio',
+  'southwest-ohio': 'Cincinnati, Dayton / Southwest Ohio',
+  'southeast-ohio': 'Southeast Ohio',
 }
 
 /** Shared size options, used when a client doesn't define its own in `sizeTiers`. */

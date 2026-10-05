@@ -1,3 +1,5 @@
+import { demoEntries } from './clients'
+
 /*
  * Per-client visual themes, sampled from each business's live homepage
  * (computed fonts, colors, button shapes and header layout) so the widget
@@ -113,7 +115,7 @@ const HELVETICA = '"Helvetica Neue", Helvetica, Arial, Arimo'
 const ARIAL = 'Arial, Helvetica, Arimo'
 const ARIMO = 'Arimo:ital,wght@0,400;0,500;0,700;1,700'
 
-export const themes: Record<string, ClientTheme> = {
+const baseThemes: Record<string, ClientTheme> = {
   // gkspolishing.com — WordPress/The7: red utility bar, white header, Saira Condensed hero in a red frame.
   gks: {
     googleFonts: ['Saira+Condensed:wght@600;700', 'Roboto+Condensed:wght@500;600;700', 'Roboto:wght@400;500;700'],
@@ -186,57 +188,6 @@ export const themes: Record<string, ClientTheme> = {
       eyebrow: { text: 'Call or text', style: 'caps' },
       headline: 'We come to your home, office or shop',
       size: 'md',
-      overlap: false,
-    },
-  },
-
-  // sureshinemarinedetailing.com — near-black editorial layout, cream type, teal accent, tracked monospace labels.
-  'sure-shine': {
-    googleFonts: ['Inter:wght@400;500;700;800', 'JetBrains+Mono:wght@400;500'],
-    mode: 'dark',
-    display: { font: 'Inter', weight: 800, tracking: '-0.035em' },
-    heading: { font: 'Inter', weight: 700, tracking: '-0.02em' },
-    body: { font: 'Inter' },
-    label: { font: '"JetBrains Mono"', weight: 400, case: 'uppercase', tracking: '0.3em', color: '#35E0C9' },
-    radius: 0,
-    colors: {
-      page: '#0A0E11',
-      surface: '#0A0E11',
-      surfaceAlt: '#10171C',
-      text: '#F1EDE3',
-      muted: '#A9A496',
-      border: '#232F36',
-      brand: '#35E0C9',
-      brandFg: '#0A0E11',
-      accent: '#35E0C9',
-    },
-    button: {
-      bg: '#35E0C9',
-      fg: '#0A0E11',
-      radius: 0,
-      case: 'uppercase',
-      tracking: '0.25em',
-      weight: 500,
-      font: '"JetBrains Mono"',
-    },
-    hero: {
-      nav: {
-        bg: '#0A0E11',
-        fg: '#F1EDE3',
-        borderColor: '#232F36',
-        wordmark: 'Sure Shine',
-        action: { label: '(216) 212-3283', href: 'tel:2162123283', style: 'outline' },
-      },
-      layout: 'banner',
-      background: '#0A0E11',
-      fg: '#F1EDE3',
-      align: 'left',
-      eyebrow: { text: 'Catawba Island to Mentor, OH', style: 'mono' },
-      headline: 'Book a detail. We come to',
-      highlight: 'you.',
-      highlightColor: '#35E0C9',
-      sub: 'Marine ceramic coating, full-service boat & yacht detailing, compounding, wet sanding and bottom paint — at your slip.',
-      size: 'xl',
       overlap: false,
     },
   },
@@ -525,44 +476,6 @@ export const themes: Record<string, ClientTheme> = {
     },
   },
 
-  // spashine.net — airy Vite/React site: white and sky blue, Inter 600 with tight tracking, two-tone headline, pill buttons.
-  spashine: {
-    googleFonts: ['Inter:wght@400;500;600'],
-    mode: 'light',
-    display: { font: 'Inter', weight: 600, tracking: '-0.025em', color: '#161D27' },
-    heading: { font: 'Inter', weight: 600, tracking: '-0.015em', color: '#161D27' },
-    body: { font: 'Inter' },
-    label: { font: 'Inter', weight: 500, case: 'uppercase', tracking: '0.1em', color: '#5B6472' },
-    radius: 16,
-    colors: {
-      page: '#F7FBFF',
-      surface: '#FFFFFF',
-      surfaceAlt: '#F1F5F9',
-      text: '#161D27',
-      muted: '#5B6472',
-      border: '#E2E8F0',
-      brand: '#1F9EF9',
-      brandFg: '#FFFFFF',
-      accent: '#1F9EF9',
-    },
-    button: { bg: '#1F9EF9', fg: '#FFFFFF', radius: 999, weight: 500 },
-    hero: {
-      nav: { bg: 'rgba(255, 255, 255, 0)', fg: '#161D27', wordmark: 'SpaShine', action: { label: 'Book Now', href: '#booking', style: 'button' } },
-      layout: 'banner',
-      background: 'linear-gradient(180deg, #D7EEFF 0%, #EAF6FF 55%, #F7FBFF 100%)',
-      fg: '#161D27',
-      align: 'center',
-      eyebrow: { text: 'Mobile detailing · Columbus, OH', style: 'badge' },
-      headline: 'Book mobile car detailing',
-      highlight: 'in Columbus, Ohio',
-      highlightColor: '#3AAEFA',
-      highlightOnNewLine: true,
-      sub: 'Premium interior and exterior detailing brought directly to your driveway. Essential Clean from $225 · Full Detail from $250.',
-      size: 'lg',
-      overlap: false,
-    },
-  },
-
   // mhautodetail.com — Duda site: black info bar, dark green-tinted hero, Questrial, square pure-green and blue buttons.
   'mh-auto': {
     googleFonts: ['Questrial', 'Ubuntu:wght@400;500;700'],
@@ -644,46 +557,6 @@ export const themes: Record<string, ClientTheme> = {
       sub: 'Mobile mechanics serving Columbus, Ohio. Book on-site diagnostics and repair at your driveway.',
       box: 'rgba(194, 0, 45, 0.82)',
       size: 'lg',
-      overlap: false,
-    },
-  },
-
-  // furballfitnesspetcare.com — Wix: boxed page, cream header band, grey tab nav, red Raleway headings and red buttons.
-  'furball-fitness': {
-    googleFonts: ['Raleway:wght@400;500;700'],
-    mode: 'light',
-    display: { font: 'Raleway', weight: 500, color: '#B5222A' },
-    heading: { font: 'Raleway', weight: 700, color: '#B5222A' },
-    body: { font: 'Raleway' },
-    label: { font: 'Raleway', weight: 700, case: 'uppercase', tracking: '0.04em', color: '#555555' },
-    radius: 5,
-    colors: {
-      page: '#FFFFFF',
-      surface: '#FFFFFF',
-      surfaceAlt: '#F7F5E6',
-      text: '#1A1A1A',
-      muted: '#555555',
-      border: '#DCD8B0',
-      brand: '#BE1724',
-      brandFg: '#FFFFFF',
-      accent: '#BE1724',
-    },
-    button: { bg: '#BE1724', fg: '#FFFFFF', radius: 5, case: 'uppercase', weight: 700 },
-    hero: {
-      nav: {
-        logoSize: 'lg',
-        bg: '#EFECC2',
-        fg: '#000000',
-        action: { label: '(614) 986-9890', href: 'tel:6149869890', style: 'text' },
-      },
-      layout: 'banner',
-      background: '#FFFFFF',
-      fg: '#1A1A1A',
-      align: 'left',
-      headline: 'Mobile Baths & Nail Trims',
-      headlineColor: '#B5222A',
-      sub: 'Our BarkBath machine comes to your door, Monday through Friday. Book a mobile bath, nail trim or Dremel below.',
-      size: 'md',
       overlap: false,
     },
   },
@@ -860,4 +733,9 @@ export const themes: Record<string, ClientTheme> = {
       overlap: false,
     },
   },
+}
+
+export const themes: Record<string, ClientTheme> = {
+  ...baseThemes,
+  ...Object.fromEntries(demoEntries.map((entry) => [entry.client.slug, entry.theme])),
 }

@@ -1,0 +1,10 @@
+{
+  "name": "ohio-leads-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Helper scripts for the ohio-leads skill. Uses the Chromium already installed by Playwright (npx playwright install chromium).",
+  "dependencies": {
+    "playwright-core": "1.63.0",
+    "sharp": "^0.35.5"
+  }
+}

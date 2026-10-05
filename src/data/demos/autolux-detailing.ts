@@ -1,0 +1,86 @@
+import type { DemoEntry } from '../demo-entry'
+
+// zanesvilledetailing.com — homepage, service pages, /deposit-policy. "Start Your Quote" opens a contact form;
+// appointments then need a $50/$100 deposit taken by hand. No prices are published. Mobile service is new.
+// Theme: GoDaddy site — electric-blue announcement bar and buttons, near-black header, League Spartan hero, Lato.
+export default {
+  client: {
+    slug: 'autolux-detailing',
+    name: 'AutoLux Detailing',
+    tagline: "Zanesville's car detailing & ceramic coating professionals — now offering mobile service",
+    location: 'Zanesville, OH',
+    region: 'southeast-ohio',
+    address: '1408 Michael Drive, Zanesville, OH 43701',
+    logo: { src: '/logos/autolux-detailing.jpg', background: '#000000' },
+    primaryColor: '#1E1AED',
+    accentColor: '#161616',
+    vertical: 'multi',
+    services: [
+      {
+        id: 'al-interior',
+        name: 'Full Interior Cleaning',
+        price: null,
+        durationHours: 3,
+        description: 'Seats, mats, dash, door panels and carpet thoroughly cleaned, detailed and shampooed. Our most popular service.',
+        category: 'auto',
+        popular: true,
+      },
+      { id: 'al-exterior', name: 'Exterior Detail / Wash & Wax', price: null, durationHours: 2, description: 'Decontaminated, smooth, glossy paint with a protective wax layer.', category: 'auto' },
+      { id: 'al-correction', name: 'Level 2 Paint Correction', price: null, durationHours: 8, description: 'Machine polish removing 80%+ of paint imperfections.', category: 'auto' },
+      { id: 'al-ceramic', name: 'Ceramic Coating', price: null, durationHours: 10, description: 'Multi-year paint protection — applied after paint correction prep.', category: 'auto' },
+      { id: 'al-headlights', name: 'Headlight Restoration', price: null, durationHours: 1, description: 'Cloudy, yellowed headlights restored.', category: 'auto' },
+      {
+        id: 'al-odor',
+        name: 'Smoke & Odor Removal',
+        price: null,
+        durationHours: 12,
+        description: 'Six-step odor elimination with ozone. Shop drop-off for at least 2 days.',
+        category: 'auto',
+      },
+      { id: 'al-boat', name: 'Boat Detailing', price: null, durationHours: 5, description: 'Boat cleaning, polishing and ceramic coating.', category: 'marine' },
+      { id: 'al-rv', name: 'RV Detailing', price: null, durationHours: 6, description: 'RV and camper detailing.', category: 'rv' },
+    ],
+    addons: [],
+    freeRadiusZones: [
+      '43701', 'Zanesville', 'Dresden', 'Nashport', 'Duncan Falls', 'Crooksville', 'New Lexington', 'New Concord', 'Somerset', 'Cambridge',
+    ],
+  },
+  theme: {
+    googleFonts: ['League+Spartan:wght@500;700', 'Lato:wght@400;700'],
+    mode: 'light',
+    display: { font: '"League Spartan"', weight: 700, tracking: '-0.01em', color: '#F7F7F7' },
+    heading: { font: 'Lato', weight: 700, color: '#1E1AED' },
+    body: { font: 'Lato' },
+    label: { font: 'Lato', weight: 700, case: 'uppercase', tracking: '0.06em', color: '#555555' },
+    radius: 4,
+    colors: {
+      page: '#F6F6F6',
+      surface: '#FFFFFF',
+      surfaceAlt: '#EFEFEF',
+      text: '#1B1B1B',
+      muted: '#5E5E5E',
+      border: '#DDDDDD',
+      brand: '#1E1AED',
+      brandFg: '#FFFFFF',
+      accent: '#1E1AED',
+    },
+    button: { bg: '#1E1AED', fg: '#FFFFFF', radius: 4, case: 'uppercase', tracking: '0.06em', weight: 700 },
+    hero: {
+      topBar: { bg: '#1E1AED', fg: '#FFFFFF', items: ['We now offer MOBILE SERVICES!'], align: 'center' },
+      nav: {
+        bg: '#161616',
+        fg: '#FFFFFF',
+        logoSize: 'lg',
+        action: { label: '740-221-3564', href: 'tel:7402213564', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(22,22,22,0.55), rgba(22,22,22,0.7)), #6b1f25',
+      fg: '#FFFFFF',
+      align: 'center',
+      headline: "Zanesville's Car Detailing Professionals",
+      sub: 'Specializing in car detailing, ceramic coating, and boat detailing. Pick a service and reserve your spot below.',
+      size: 'xl',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

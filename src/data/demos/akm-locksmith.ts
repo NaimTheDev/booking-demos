@@ -1,0 +1,71 @@
+import type { DemoEntry } from '../demo-entry'
+
+// akmlocksmith.com — homepage service lists (residential, commercial, automotive) and service-area pages.
+// Booking today is a phone call or a "Request a Quote" form; no prices are published.
+// Theme: Divi site — Vollkorn gold wordmark, Josefin Sans headline, gold pill call button, red accents,
+// the red-ringed cattle-dog-with-a-key badge.
+export default {
+  client: {
+    slug: 'akm-locksmith',
+    name: 'AKM Locksmith',
+    tagline: 'Emergency locksmith and key duplication services — serving the Hocking Hills area',
+    location: 'Logan & the Hocking Hills, OH',
+    region: 'central-ohio',
+    address: 'Logan, OH 43138',
+    logo: { src: '/logos/akm-locksmith.png', background: '#F3EBDD' },
+    primaryColor: '#C5973C',
+    accentColor: '#EC1C24',
+    vertical: 'locksmith',
+    services: [
+      { id: 'akm-car-lockout', name: 'Vehicle Lockout', price: null, durationHours: 0.5, description: 'Emergency lockout help — we come to you.', popular: true },
+      { id: 'akm-fob', name: 'Key Fob Replacement & Programming', price: null, durationHours: 1, description: 'Remotes, transponder keys and programming.' },
+      { id: 'akm-car-key', name: 'Car Key Duplication', price: null, durationHours: 0.75, description: 'Vehicle key cutting, including high-security keys.' },
+      { id: 'akm-ecm', name: 'ECM / PCM Repair', price: null, durationHours: 2, description: 'Engine and powertrain control module repair.' },
+      { id: 'akm-home-lockout', name: 'Home Lockout', price: null, durationHours: 0.5, description: 'Residential lockout assistance.' },
+      { id: 'akm-rekey', name: 'Door Re-Keying', price: null, durationHours: 1, description: 'Re-key residential or commercial locks.' },
+      { id: 'akm-knob', name: 'Door Knob Repair & Replacement', price: null, durationHours: 1, description: 'Repair or replace door knobs and locks.' },
+      { id: 'akm-commercial', name: 'Commercial Lock Service', price: null, durationHours: 1.5, description: 'Lockouts, re-keying and hardware for businesses.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['43138', 'Logan', 'Nelsonville', 'Laurelville', 'Rockbridge', 'Murray City', 'New Straitsville', 'Athens'],
+  },
+  theme: {
+    googleFonts: ['Vollkorn:wght@700', 'Josefin+Sans:wght@600;700', 'Open+Sans:wght@400;600'],
+    mode: 'light',
+    display: { font: '"Josefin Sans"', weight: 700, color: '#FFFFFF' },
+    heading: { font: '"Josefin Sans"', weight: 700, color: '#333333' },
+    body: { font: '"Open Sans"' },
+    label: { font: '"Open Sans"', weight: 600, case: 'uppercase', tracking: '0.06em', color: '#666666' },
+    radius: 10,
+    colors: {
+      page: '#E5E3E0',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F4F1EC',
+      text: '#333333',
+      muted: '#666666',
+      border: '#D8D3CB',
+      brand: '#C5973C',
+      brandFg: '#FFFFFF',
+      accent: '#EC1C24',
+    },
+    button: { bg: '#C5973C', fg: '#FFFFFF', radius: 20, weight: 700, font: '"Josefin Sans"' },
+    hero: {
+      nav: {
+        bg: '#FFFFFF',
+        fg: '#333333',
+        wordmark: 'AKM Locksmith',
+        action: { label: 'Call (740) 603-5592', href: 'tel:7406035592', style: 'button', color: '#EC1C24' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(40,44,52,0.86), rgba(40,44,52,0.86)), #59606b',
+      fg: '#FFFFFF',
+      align: 'left',
+      eyebrow: { text: 'Aussie Key Masters', style: 'script', font: 'Vollkorn', color: '#EC1C24' },
+      kicker: 'AKM Locksmith',
+      headline: 'Emergency Locksmith and Key Duplication Services',
+      sub: 'Serving the Hocking Hills area — homes, businesses and vehicles. Pick what you need and request a time below.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

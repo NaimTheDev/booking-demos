@@ -1,0 +1,71 @@
+import type { DemoEntry } from '../demo-entry'
+
+// accuratelocksmithsecurity.com — WordPress: light grey (#F4F6F5) page, navy (#001946) wordmark with
+// copper (#BA5A31) subline, Figtree bold uppercase hero on a navy panel with a copper rule, square
+// outline buttons, Archivo body. Phone / contact form only. No prices published.
+export default {
+  client: {
+    slug: 'accurate-locksmith',
+    name: 'Accurate Locksmith & Security',
+    tagline: "We don't just lock your door — we secure it. Hilliard's locksmith since 2004",
+    location: 'Hilliard, OH',
+    region: 'central-ohio',
+    address: 'Hilliard, OH 43026',
+    logo: { src: '/logos/accurate-locksmith.png', background: '#FFFFFF' },
+    primaryColor: '#001946',
+    accentColor: '#BA5A31',
+    vertical: 'locksmith',
+    services: [
+      { id: 'als-rekey', name: 'Rekeying & Lock Repair', price: null, durationHours: 1, description: 'Rekey or repair residential and commercial locks.', popular: true },
+      { id: 'als-install', name: 'High-Security Lock Installation', price: null, durationHours: 1.5, description: 'Mul-T-Lock, EMTEK and other high-performance hardware installed right the first time.' },
+      { id: 'als-inspection', name: 'Door Frame Security Inspection', price: 0, durationHours: 0.5, description: 'Free inspection of your door frame with recommendations to harden your home.' },
+      { id: 'als-vintage', name: 'Vintage Mortise Lock Repair', price: null, durationHours: 2, description: 'Repair for 70- to 120-year-old doors and mortise locks.' },
+      { id: 'als-commercial', name: 'Commercial Locking Hardware', price: null, durationHours: 2, description: 'Hardware that meets life-safety and ADA codes.' },
+      { id: 'als-access', name: 'Electronic Access Control', price: null, durationHours: 3, description: 'Keyless and access-control systems tailored to your business.' },
+      { id: 'als-keys', name: 'Duplicate Keys', price: null, durationHours: 0.5, description: 'Key duplication.' },
+      { id: 'als-lockout', name: 'Emergency Lockout', price: null, durationHours: 0.5, description: '24/7 emergency service — locked out of your home or office.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['Hilliard', 'Dublin', 'Powell', 'Westerville', 'Worthington', 'Upper Arlington', 'Columbus', '43026'],
+  },
+  theme: {
+    googleFonts: ['Figtree:wght@400;700', 'Archivo:wght@400;500;600'],
+    mode: 'light',
+    display: { font: 'Figtree', weight: 700, case: 'uppercase', color: '#FFFFFF' },
+    heading: { font: 'Figtree', weight: 700, color: '#001946' },
+    body: { font: 'Archivo' },
+    label: { font: 'Archivo', weight: 600, case: 'uppercase', tracking: '0.06em', color: '#BA5A31' },
+    radius: 0,
+    colors: {
+      page: '#F4F6F5',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F2F4F3',
+      text: '#1D1D20',
+      muted: '#5E6470',
+      border: '#D9DEE3',
+      brand: '#001946',
+      brandFg: '#FFFFFF',
+      accent: '#6B98CB',
+    },
+    button: { bg: '#001946', fg: '#FFFFFF', radius: 0, case: 'uppercase', weight: 600, tracking: '0.03em', font: 'Archivo' },
+    hero: {
+      topBar: { bg: '#F4F6F5', fg: '#001946', items: ['24/7 Emergency Services', '614-764-5625'], align: 'between' },
+      nav: {
+        bg: '#F4F6F5',
+        fg: '#001946',
+        action: { label: '614-764-5625', href: 'tel:6147645625', style: 'text', color: '#001946' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(90deg, rgba(0, 25, 70, 0.96) 0%, rgba(0, 25, 70, 0.9) 50%, rgba(80, 60, 50, 0.55) 100%), #6B5A50',
+      fg: '#FFFFFF',
+      align: 'left',
+      kicker: "We don't just lock your door",
+      headline: 'We Secure It',
+      sub: '24/7 emergency services • fast & professional mobile service. Pick the job and a time that works — I’ll confirm.',
+      ornament: 'rule',
+      ornamentColor: '#BA5A31',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

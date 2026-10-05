@@ -1,0 +1,78 @@
+import type { DemoEntry } from '../demo-entry'
+
+// moorehomeservicesoh.com — homepage, /About, washing service pages. "Hire Us!" / "Get Started" lead to a
+// quote request ("we will contact you to setup an appointment"). No prices are published.
+// Theme: blue utility bar, white header, Oswald uppercase with wide tracking, Lato body, blue pill buttons.
+export default {
+  client: {
+    slug: 'moore-home-services',
+    name: 'Moore Home Services',
+    tagline: 'Soft wash, pressure wash, exterior lighting & handyman services in Zanesville',
+    location: 'Zanesville, OH',
+    region: 'southeast-ohio',
+    address: '3271 Broadvue Cir, Zanesville, OH 43701',
+    logo: { src: '/logos/moore-home-services.png', background: '#FFFFFF' },
+    primaryColor: '#065598',
+    accentColor: '#3A4ED5',
+    vertical: 'exterior',
+    services: [
+      {
+        id: 'mhs-house',
+        name: 'Soft-Wash House Washing',
+        price: null,
+        durationHours: 3,
+        description: 'Low-pressure soft wash with biodegradable soap — siding, soffit, fascia and gutters.',
+        popular: true,
+      },
+      { id: 'mhs-roof', name: 'Roof Cleaning', price: null, durationHours: 3, description: 'Low-pressure soft-wash roof cleaning.' },
+      { id: 'mhs-concrete', name: 'Driveway & Concrete Cleaning', price: null, durationHours: 2, description: 'Remove dirt and debris from high-traffic concrete.' },
+      { id: 'mhs-gutter', name: 'Gutter Cleaning', price: null, durationHours: 2, description: 'Gutters cleared and flushed.' },
+      { id: 'mhs-window', name: 'Window Cleaning', price: null, durationHours: 2, description: 'Exterior window cleaning.' },
+      { id: 'mhs-deck', name: 'Deck & Fence Staining & Restoration', price: null, durationHours: 6, description: 'Cleaning, staining and restoration for decks, fences and log cabins.' },
+      { id: 'mhs-rust', name: 'Rust & Graffiti Removal', price: null, durationHours: 2, description: 'Rust stain and graffiti removal.' },
+      { id: 'mhs-commercial', name: 'Gas Station & Heavy Equipment Washing', price: null, durationHours: 4, description: 'Commercial washing for gas stations and equipment.' },
+      { id: 'mhs-lights', name: 'Christmas Light Installation', price: null, durationHours: 4, description: 'Residential and commercial, temporary or permanent lighting.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['43701', 'Zanesville', 'South Zanesville', 'Nashport', 'Dresden', 'Duncan Falls', 'Philo', 'New Concord', 'Roseville'],
+  },
+  theme: {
+    googleFonts: ['Oswald:wght@400;500', 'Lato:wght@400;700'],
+    mode: 'light',
+    display: { font: 'Oswald', weight: 400, case: 'uppercase', tracking: '0.12em', color: '#FFFFFF' },
+    heading: { font: 'Oswald', weight: 400, case: 'uppercase', tracking: '0.06em', color: '#085496' },
+    body: { font: 'Lato' },
+    label: { font: 'Oswald', weight: 400, case: 'uppercase', tracking: '0.08em', color: '#085496' },
+    radius: 6,
+    colors: {
+      page: '#F2F3F9',
+      surface: '#FFFFFF',
+      surfaceAlt: '#EEF1F8',
+      text: '#1A1A1A',
+      muted: '#5E6575',
+      border: '#D9DEEA',
+      brand: '#065598',
+      brandFg: '#FFFFFF',
+      accent: '#085496',
+    },
+    button: { bg: '#065598', fg: '#FFFFFF', radius: 35, case: 'uppercase', tracking: '0.1em', weight: 400, font: 'Oswald' },
+    hero: {
+      topBar: { bg: '#085496', fg: '#FFFFFF', items: ['(740) 405-2047', '3271 Broadvue Cir, Zanesville, OH 43701'], align: 'start' },
+      nav: {
+        bg: '#FFFFFF',
+        fg: '#222222',
+        logoSize: 'lg',
+        action: { label: 'Hire Us!', href: 'tel:7404052047', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(20,30,60,0.55), rgba(20,30,60,0.7)), #4b5872',
+      fg: '#FFFFFF',
+      align: 'left',
+      headline: 'From Old to New',
+      subline: 'Commercial & residential pressure washing & soft-wash services',
+      sub: 'Serving Zanesville and Muskingum County. Choose a service and request your appointment below.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

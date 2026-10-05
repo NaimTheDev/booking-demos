@@ -27,3 +27,5 @@ dist-ssr
 # Private business notes (repo is public)
 PRICING.md
 COMPETITORS.md
+LEADS.md
+leads/

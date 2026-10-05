@@ -1,0 +1,71 @@
+import type { DemoEntry } from '../demo-entry'
+
+// agplock.com — hand-built site: slate-blue header band with a stacked light-blue nav column, the silver
+// "AGP Lock and Security" badge logo, PT Sans/Lato headings in slate grey, blue underlined phone links.
+// Locksmith + security company in Miamisburg since 2005. No prices published (call/text or email).
+export default {
+  client: {
+    slug: 'agp-lock',
+    name: 'AGP Lock & Security',
+    tagline: 'Always Greatest Protection — locksmith and security solutions since 2005.',
+    location: 'Miamisburg, OH',
+    region: 'southwest-ohio',
+    address: 'Miamisburg, OH 45342',
+    logo: { src: '/logos/agp-lock.jpg', background: '#FFFFFF' },
+    primaryColor: '#0F60A9',
+    accentColor: '#52646F',
+    vertical: 'locksmith',
+    services: [
+      { id: 'agp-lockout', name: 'Lockout (Home, Business or Car)', price: null, durationHours: 1, description: '24/7 emergency lockout service — our mobile lock shops come to you.', popular: true },
+      { id: 'agp-rekey', name: 'Rekey Locks', price: null, durationHours: 1.5, description: 'Rekey existing locks so old keys no longer work.' },
+      { id: 'agp-install', name: 'Lock Installation & Repair', price: null, durationHours: 2, description: 'Sales, installation, repair and rekey for most any type of lock, including high-security Mul-T-Lock.' },
+      { id: 'agp-master', name: 'Master Key System', price: null, durationHours: 4, description: 'Master key systems for businesses, schools, apartments and municipalities.' },
+      { id: 'agp-panic', name: 'Panic Hardware & Door Closers', price: null, durationHours: 2, description: 'Install and repair panic bars and closers on commercial doors.' },
+      { id: 'agp-access', name: 'Access Control', price: null, durationHours: 4, description: 'Keypad, card and biometric access control — certified on KABA E-Plex wireless.' },
+      { id: 'agp-cctv', name: 'Camera (CCTV) System', price: null, durationHours: 5, description: 'HD camera systems designed, installed and maintained.' },
+      { id: 'agp-alarm', name: 'Alarm System', price: null, durationHours: 4, description: 'Wired or wireless alarm panels with 5 Diamond monitoring.' },
+      { id: 'agp-safe', name: 'Safe Work', price: null, durationHours: 2, description: 'Safe opening, combination changes and service.' },
+    ],
+    addons: [{ id: 'agp-biometric', name: 'Biometric / Keyless Lock Upgrade', price: null, addedHours: 1 }],
+    freeRadiusZones: ['Miamisburg', 'Dayton', 'Middletown', 'Cincinnati', 'Montgomery County', 'Warren County', 'Butler County', 'Greene County', 'Miami County', 'Clark County', 'Preble County'],
+  },
+  theme: {
+    googleFonts: ['PT+Sans:wght@400;700', 'Lato:wght@400;700;900'],
+    mode: 'light',
+    display: { font: 'Lato', weight: 900, color: '#52646F' },
+    heading: { font: 'Lato', weight: 700, color: '#52646F' },
+    body: { font: '"PT Sans"' },
+    label: { font: '"PT Sans"', weight: 700, case: 'uppercase', tracking: '0.06em', color: '#6E7FB8' },
+    radius: 4,
+    colors: {
+      page: '#DCEBF7',
+      surface: '#FFFFFF',
+      surfaceAlt: '#EEF5FB',
+      text: '#2B3740',
+      muted: '#5E6E7A',
+      border: '#C2D3E0',
+      brand: '#0F60A9',
+      brandFg: '#FFFFFF',
+      accent: '#E8121B',
+    },
+    button: { bg: '#0F60A9', fg: '#FFFFFF', radius: 4, weight: 700, font: '"PT Sans"' },
+    hero: {
+      topBar: { bg: '#B5C7D2', fg: '#0F4FA8', items: ['info@AGPLock.com', '(937) 401-2119 Dayton', '(513) 234-5671 Cincinnati'], align: 'between' },
+      nav: {
+        bg: '#B5C7D2',
+        fg: '#1A2CE0',
+        logoSize: 'lg',
+        action: { label: 'Text (937) 554-6318', href: 'sms:9375546318', style: 'text', color: '#0F4FA8' },
+      },
+      layout: 'banner',
+      background: '#B5C7D2',
+      fg: '#52646F',
+      align: 'center',
+      eyebrow: { text: 'Now located in Miamisburg, Ohio', style: 'caps', color: '#6E7FB8' },
+      headline: 'Your Trusted Locksmith and Security Solutions',
+      sub: 'Lockouts, rekeys, access control and cameras for homes and businesses across the tri-state. Request service below.',
+      size: 'md',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

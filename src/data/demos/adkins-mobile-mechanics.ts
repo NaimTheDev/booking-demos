@@ -1,0 +1,70 @@
+import type { DemoEntry } from '../demo-entry'
+
+// adkinsmobilemechanic.com — WordPress: warm yellow-to-pink gradient page, big Plus Jakarta Sans 700 headline
+// "Mobile Mechanic Near Me & Auto Repair Near Me | We Come To You!", red-orange accent line, glowing check-engine
+// logo. "Schedule Your Mobile Mechanic Today — GET STARTED" leads to a plain contact form (first/last name, email,
+// message) or a phone call. Open 7 days, covers Stark, Summit, Portage, Medina, Tuscarawas and Wayne. No prices.
+export default {
+  client: {
+    slug: 'adkins-mobile-mechanics',
+    name: 'Adkins Mobile Mechanics',
+    tagline: 'The mechanic that comes to you — open 7 days a week.',
+    location: 'Canton, OH',
+    region: 'northeast-ohio',
+    address: 'Canton, OH',
+    logo: { src: '/logos/adkins-mobile-mechanics.png', background: '#1A1410' },
+    primaryColor: '#C2410C',
+    accentColor: '#091310',
+    vertical: 'mechanic',
+    services: [
+      { id: 'amm-diag', name: 'Check Engine Light / Engine Diagnostics', price: null, durationHours: 1, description: 'Check engine, ABS, traction control, battery light and evap diagnostics.', popular: true },
+      { id: 'amm-brakes', name: 'Brake Service & Repair', price: null, durationHours: 2, description: 'Pads, rotors and brake repair at your home or work.', popular: true },
+      { id: 'amm-ac', name: 'Auto AC Repair & Recharge', price: null, durationHours: 2, description: 'AC recharge, leak detection, diagnostics and compressor replacement.' },
+      { id: 'amm-nostart', name: 'No-Start Diagnosis', price: null, durationHours: 1.5, description: 'Starting/charging systems, starters, alternators and electrical diagnostics.' },
+      { id: 'amm-battery', name: 'Battery Replacement', price: null, durationHours: 0.5, description: 'Battery tested and replaced on-site.' },
+      { id: 'amm-suspension', name: 'Suspension & Steering', price: null, durationHours: 3, description: 'Struts, shocks, ball joints, control arms, tie rods, CV axles and wheel bearings.' },
+      { id: 'amm-cooling', name: 'Cooling System', price: null, durationHours: 3, description: 'Water pumps, hoses and radiators.' },
+      { id: 'amm-tuneup', name: 'Tune-Up', price: null, durationHours: 2, description: 'Tune-up for all makes and models, foreign and domestic.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['Canton', 'North Canton', 'Green', 'Akron', 'Alliance', 'Louisville', 'Massillon', 'Wooster', 'Hartville', 'Barberton', 'Stow', 'Cuyahoga Falls', 'Kent', 'Hudson'],
+  },
+  theme: {
+    googleFonts: ['Plus+Jakarta+Sans:wght@400;600;700;800'],
+    mode: 'light',
+    display: { font: '"Plus Jakarta Sans"', weight: 800, tracking: '-0.01em', color: '#091310' },
+    heading: { font: '"Plus Jakarta Sans"', weight: 700, color: '#091310' },
+    body: { font: '"Plus Jakarta Sans"' },
+    label: { font: '"Plus Jakarta Sans"', weight: 700, case: 'uppercase', tracking: '0.08em', color: '#C2410C' },
+    radius: 10,
+    colors: {
+      page: 'linear-gradient(180deg, #FFE38A 0%, #F9A07A 50%, #F2456A 100%)',
+      surface: '#FFFFFF',
+      surfaceAlt: '#FFF6E5',
+      text: '#1C1B1B',
+      muted: '#5F5A57',
+      border: '#EAD9C5',
+      brand: '#C2410C',
+      brandFg: '#FFFFFF',
+      accent: '#E0473C',
+    },
+    button: { bg: '#091310', fg: '#FFFFFF', radius: 8, weight: 700, font: '"Plus Jakarta Sans"' },
+    hero: {
+      nav: {
+        bg: 'transparent',
+        fg: '#091310',
+        logoSize: 'lg',
+        action: { label: '(330) 362-4680', href: 'tel:3303624680', style: 'button', color: '#091310' },
+      },
+      layout: 'banner',
+      background: 'transparent',
+      fg: '#091310',
+      align: 'center',
+      headline: 'Mobile Mechanic Near Me & Auto Repair Near Me | We Come To You!',
+      subline: 'Adkins Mobile Mechanics llc, Canton, Ohio',
+      sub: 'Most repairs can be made on site — no tow, no waiting room. Pick the repair and a time that works for you.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

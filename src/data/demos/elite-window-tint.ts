@@ -1,0 +1,68 @@
+import type { DemoEntry } from '../demo-entry'
+
+// facebook.com/profile.php?id=100057324375585 — no website. The Intro lists "Full Window Tint for Auto,
+// Commercial and Home. Additional service of Vinyl wrapping available." Booking is call/text or Messenger.
+// No prices published. Theme follows the cover art: grey "ELITE Window Tint" wordmark with a car outline.
+export default {
+  client: {
+    slug: 'elite-window-tint',
+    name: 'Elite Window Tint and Vinyl',
+    tagline: 'Full window tint for auto, commercial and home — plus vinyl wrapping',
+    location: 'Zanesville, OH',
+    region: 'southeast-ohio',
+    address: '3350 Wayne Ridge Road, Zanesville, OH',
+    primaryColor: '#2B2B2B',
+    accentColor: '#8C8C8C',
+    vertical: 'tint',
+    services: [
+      { id: 'ewt-auto', name: 'Automotive Window Tint', price: null, durationHours: 2.5, description: 'Full window tint for cars, trucks and SUVs.', popular: true },
+      { id: 'ewt-home', name: 'Residential Window Tint', price: null, durationHours: 4, description: 'Home window film for heat, glare and privacy.' },
+      { id: 'ewt-commercial', name: 'Commercial Window Tint', price: null, durationHours: 6, description: 'Storefront and office window film.' },
+      { id: 'ewt-vinyl', name: 'Vinyl Wrapping', price: null, durationHours: 8, description: 'Vinyl wraps and accents — custom quote.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['43701', 'Zanesville', 'South Zanesville', 'Nashport', 'Dresden', 'Duncan Falls', 'New Concord', 'Roseville'],
+  },
+  theme: {
+    googleFonts: ['Saira+Condensed:wght@600;800', 'Inter:wght@400;600'],
+    mode: 'light',
+    display: { font: '"Saira Condensed"', weight: 800, case: 'uppercase', tracking: '0.02em', color: '#2B2B2B' },
+    heading: { font: '"Saira Condensed"', weight: 600, case: 'uppercase', tracking: '0.03em', color: '#2B2B2B' },
+    body: { font: 'Inter' },
+    label: { font: 'Inter', weight: 600, case: 'uppercase', tracking: '0.1em', color: '#7A7A7A' },
+    radius: 6,
+    colors: {
+      page: '#EFEFEF',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F4F4F4',
+      text: '#1F1F1F',
+      muted: '#6E6E6E',
+      border: '#D6D6D6',
+      brand: '#2B2B2B',
+      brandFg: '#FFFFFF',
+      accent: '#8C8C8C',
+    },
+    button: { bg: '#2B2B2B', fg: '#FFFFFF', radius: 6, case: 'uppercase', tracking: '0.08em', weight: 600 },
+    hero: {
+      nav: {
+        bg: '#FFFFFF',
+        fg: '#2B2B2B',
+        borderColor: '#D6D6D6',
+        wordmark: 'Elite Window Tint',
+        action: { label: 'Call or Text 740-683-3364', href: 'tel:7406833364', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(180deg, #F7F7F7 0%, #D9D9D9 100%)',
+      fg: '#2B2B2B',
+      align: 'center',
+      eyebrow: { text: 'Zanesville, OH', style: 'caps', color: '#7A7A7A' },
+      headline: 'Elite',
+      highlight: 'Window Tint & Vinyl',
+      highlightColor: '#8C8C8C',
+      highlightOnNewLine: true,
+      sub: 'Auto, home and commercial tint plus vinyl wraps. Skip the phone tag — pick a service and request your spot below.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

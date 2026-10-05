@@ -1,0 +1,78 @@
+import type { DemoEntry } from '../demo-entry'
+
+// washcolumbus.com — Wix: light grey page, black-and-gold BCW script logo, Poppins semibold headlines,
+// black hero panel over the box truck, gold (#C59E18) services band, pill buttons.
+// Two sides of the business — pressure washing and detailing/ceramic (auto, marine, RV) — so this is `multi`.
+// Contact form / phone only, "free, on-site quotes"; no prices are published.
+export default {
+  client: {
+    slug: 'buckeye-clean-werks',
+    name: 'Buckeye Clean Werks',
+    tagline: 'Cleaning and protection solutions for the Central Ohio market — pressure washing, detailing and ceramic coatings.',
+    location: 'Baltimore, OH (Columbus east side)',
+    region: 'central-ohio',
+    address: '6409 Lancaster Kirkersville Rd NW, Baltimore, OH 43105',
+    logo: { src: '/logos/buckeye-clean-werks.jpg', background: '#231F1F' },
+    primaryColor: '#C59E18',
+    accentColor: '#1E1E1E',
+    vertical: 'multi',
+    services: [
+      { id: 'bcw-house', name: 'Residential Pressure Washing', price: null, durationHours: 3, description: 'House washing, driveways and flatwork — free on-site quote.', category: 'exterior', popular: true },
+      { id: 'bcw-commercial', name: 'Commercial Pressure Washing', price: null, durationHours: 6, description: 'Warehouses, parking garages, multi-family, venues, gas stations and post-construction.', category: 'exterior' },
+      { id: 'bcw-fleet', name: 'Fleet Washing', price: null, durationHours: 4, description: 'On-site fleet washing on a schedule that fits your operation.', category: 'exterior' },
+      { id: 'bcw-detail', name: 'Full Auto Detail', price: null, durationHours: 5, description: 'Fine auto detailing — 7,000+ details completed.', category: 'auto', popular: true },
+      { id: 'bcw-correction', name: 'Paint Correction', price: null, durationHours: 8, description: 'Machine polishing and refinishing to remove swirls and defects.', category: 'auto' },
+      { id: 'bcw-ceramic', name: 'Ceramic Coating', price: null, durationHours: 10, description: 'Ceramic coating installs for long-term gloss and protection.', category: 'auto' },
+      { id: 'bcw-boat', name: 'Boat Detailing & Gelcoat', price: null, durationHours: 6, description: 'Buffing and waxing, from wet-sanding gelcoat to simple pontoon details.', category: 'marine' },
+      { id: 'bcw-rv', name: 'RV Buff & Wax', price: null, durationHours: 6, description: 'Let us handle the buffing and waxing on your RV or camper.', category: 'rv' },
+    ],
+    addons: [],
+    freeRadiusZones: [
+      'Columbus', 'Dublin', 'Grove City', 'Hilliard', 'Pickerington', 'New Albany', 'Pataskala', 'Lancaster', 'Obetz',
+      'Canal Winchester', 'Granville', 'Buckeye Lake', 'Millersport', 'Baltimore',
+    ],
+  },
+  theme: {
+    googleFonts: ['Poppins:wght@500;600;700', 'Oswald:wght@400;500', 'Cormorant+Garamond:ital,wght@1,600'],
+    mode: 'light',
+    display: { font: 'Poppins', weight: 600, color: '#FFFFFF' },
+    heading: { font: 'Poppins', weight: 600, color: '#1E1E1E' },
+    body: { font: 'Poppins' },
+    label: { font: 'Oswald', weight: 500, case: 'uppercase', tracking: '0.08em', color: '#1E1E1E' },
+    radius: 4,
+    colors: {
+      page: '#F5F5F5',
+      surface: '#FFFFFF',
+      surfaceAlt: '#EFEADB',
+      text: '#1E1E1E',
+      muted: '#5C5C5C',
+      border: '#DEDAD0',
+      brand: '#C59E18',
+      brandFg: '#1E1E1E',
+      accent: '#A88512',
+    },
+    button: { bg: '#1E1E1E', fg: '#FFFFFF', radius: 999, weight: 500, font: 'Poppins' },
+    hero: {
+      nav: {
+        bg: '#F5F5F5',
+        fg: '#1E1E1E',
+        logoSize: 'lg',
+        action: { label: '(614) 560-7945', href: 'tel:6145607945', style: 'text' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(30,30,30,0.6), rgba(30,30,30,0.6)), radial-gradient(ellipse at 40% 60%, #3a3326 0%, #1e1e1e 60%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      eyebrow: { text: 'Buckeye Clean Werks', style: 'script', font: '"Cormorant Garamond"', color: '#C59E18' },
+      headline: 'Cleaning and Protection Solutions',
+      highlight: 'for the Central Ohio Market',
+      highlightColor: '#C59E18',
+      highlightOnNewLine: true,
+      sub: 'Pressure washing, fleet washing, detailing and ceramic coatings for cars, boats and RVs. Tell us what you need and pick a time.',
+      ornament: 'rule',
+      ornamentColor: '#C59E18',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

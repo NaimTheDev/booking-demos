@@ -1,0 +1,93 @@
+import type { DemoEntry } from '../demo-entry'
+
+// pwpdetailing.com — Duda "Detailers Roadmap" template: dark slate (#303540) framed hero, white + tan-gold logo,
+// extra-wide uppercase display face (Starleague, mirrored with Michroma), Archivo uppercase tan buttons with
+// near-square corners. No prices are published — PPF, tint, coating and detail packages all go through a
+// quote form (/contact#quoteform), so every service is a custom quote.
+export default {
+  client: {
+    slug: 'pwp-detailing',
+    name: 'PWP Detailing',
+    tagline: 'Paint protection film, ceramic tint and coatings in Mentor since 2012.',
+    location: 'Mentor, OH',
+    region: 'northeast-ohio',
+    address: '6076 Pinecone Dr, Mentor, OH 44060',
+    logo: { src: '/logos/pwp-detailing.svg', background: '#303540' },
+    primaryColor: '#C4AB85',
+    accentColor: '#303540',
+    vertical: 'tint',
+    services: [
+      {
+        id: 'pwp-ppf-partial',
+        name: 'PPF — Partial Front End',
+        price: null,
+        durationHours: 5,
+        description: 'Self-healing film on the partial hood and partial front fenders.',
+      },
+      {
+        id: 'pwp-ppf-full',
+        name: 'PPF — Full Front',
+        price: null,
+        durationHours: 10,
+        description: 'Full hood, full front fenders, bumper and mirrors. Also available in matte PPF.',
+        popular: true,
+      },
+      { id: 'pwp-ppf-guardian', name: 'PPF — Guardian Package', price: null, durationHours: 14, description: 'Full front plus high-impact areas like the A-pillars.' },
+      { id: 'pwp-tint-classic', name: 'Window Tint — Classic Ceramic', price: null, durationHours: 3, description: 'Up to 22% infrared heat rejection. Strip, windshield, front two or all sides & rear.' },
+      { id: 'pwp-tint-pinnacle', name: 'Window Tint — Pinnacle Ceramic', price: null, durationHours: 3, description: 'At least 62% infrared heat rejection.' },
+      { id: 'pwp-tint-stratos', name: 'Window Tint — Stratos Ceramic', price: null, durationHours: 3, description: '67% infrared heat rejection — the top-tier film.' },
+      { id: 'pwp-ceramic', name: 'Ceramic Coating Package', price: null, durationHours: 8, description: 'Professional-grade coatings with gloss enhancement prep.' },
+      { id: 'pwp-correction', name: 'Paint Correction', price: null, durationHours: 8, description: 'Multi-stage machine polishing to remove swirls and defects.' },
+      {
+        id: 'pwp-guardian',
+        name: 'Cleveland Guardian Signature Package',
+        price: null,
+        durationHours: 16,
+        description: 'Level 1 correction, 2-year ceramic on all exterior surfaces, interior and exterior detail. Upgrades to 5-year.',
+      },
+      { id: 'pwp-detail', name: 'Interior & Exterior Detail (Level 2 / 3)', price: null, durationHours: 5, description: 'Two-bucket wash, single-stage polish, trim protectant and a full interior.' },
+    ],
+    addons: [
+      { id: 'pwp-matte', name: 'Matte PPF upgrade', price: null, addedHours: 0 },
+      { id: 'pwp-calipers', name: 'Caliper painting', price: null, addedHours: 3 },
+    ],
+    freeRadiusZones: ['Mentor', 'Willoughby', 'Painesville', 'Kirtland', 'Concord', 'Chardon', 'Eastlake', 'Beachwood', 'Mayfield', 'Mayfield Heights', 'Cleveland'],
+  },
+  theme: {
+    googleFonts: ['Michroma', 'Archivo:wght@400;500;600', 'Source+Sans+3:wght@400;600'],
+    mode: 'light',
+    display: { font: 'Michroma', weight: 400, case: 'uppercase', tracking: '0.02em', color: '#FFFFFF' },
+    heading: { font: 'Michroma', weight: 400, case: 'uppercase', tracking: '0.01em', color: '#303540' },
+    body: { font: '"Source Sans 3"' },
+    label: { font: 'Archivo', weight: 500, case: 'uppercase', tracking: '0.14em', color: '#9C8463' },
+    radius: 2,
+    colors: {
+      page: '#EEEEEE',
+      surface: '#FFFFFF',
+      surfaceAlt: '#F5F5F5',
+      text: '#181818',
+      muted: '#5C6270',
+      border: '#DADADA',
+      brand: '#303540',
+      brandFg: '#FFFFFF',
+      accent: '#C4AB85',
+    },
+    button: { bg: '#C4AB85', fg: '#463939', radius: 1, case: 'uppercase', tracking: '0.12em', weight: 500, font: 'Archivo' },
+    hero: {
+      nav: {
+        bg: '#303540',
+        fg: '#FFFFFF',
+        logoSize: 'lg',
+        action: { label: 'Call (440) 384-0788', href: 'tel:4403840788', style: 'button' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(24,24,30,0.72), rgba(24,24,30,0.78)), linear-gradient(135deg, #5c6270 0%, #303540 55%, #181818 100%)',
+      fg: '#FFFFFF',
+      align: 'center',
+      headline: 'Elevating Vehicle Style and Protecting Its Integrity',
+      sub: 'PPF, ceramic window tint, coatings and detailing in Mentor. Choose your package and request an install date — we’ll confirm your quote.',
+      size: 'lg',
+      overlap: false,
+    },
+  },
+} satisfies DemoEntry

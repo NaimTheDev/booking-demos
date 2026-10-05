@@ -1,0 +1,70 @@
+import type { DemoEntry } from '../demo-entry'
+
+// bestroofwash.com — GoDaddy builder: dark utility strip, royal-blue (#0069ED) header band with Fjalla One
+// uppercase headlines, Source Sans Pro body, white/blue pill buttons (48px radius). No logo image — the header is
+// text. "FREE ESTIMATE" is a name/phone/email form; they prefer in-person estimates. No prices published.
+export default {
+  client: {
+    slug: 'roof-juice',
+    name: 'Roof Juice Soft Washing',
+    tagline: 'Roof cleaning & power washing with a 3-year roof cleaning guarantee.',
+    location: 'Cortland, OH',
+    region: 'northeast-ohio',
+    address: '3473 State Route 5, Cortland, OH 44410',
+    primaryColor: '#0069ED',
+    accentColor: '#1B1B1B',
+    vertical: 'exterior',
+    services: [
+      { id: 'rj-roof', name: 'Roof Soft Wash', price: null, durationHours: 3, description: 'No-pressure 5-step roof wash that lifts dirt and kills the algae behind black streaks. 3-year guarantee.', popular: true },
+      { id: 'rj-house', name: 'House Washing', price: null, durationHours: 3, description: 'Soft wash for vinyl and stucco siding, with window wax in the mix for a streak-free finish.' },
+      { id: 'rj-concrete', name: 'Concrete & Driveway Power Washing', price: null, durationHours: 2, description: 'Driveways, pavers and walkways power washed.' },
+      { id: 'rj-sealing', name: 'Driveway Sealing', price: null, durationHours: 2, description: 'Concrete sealing after the wash to protect your driveway for years.' },
+      { id: 'rj-deck', name: 'Deck Washing', price: null, durationHours: 2, description: 'Decks and hard surfaces cleaned with the right pressure for the material.' },
+      { id: 'rj-commercial', name: 'Commercial Building Washing', price: null, durationHours: 4, description: 'Storefronts, churches and commercial exteriors.' },
+    ],
+    addons: [],
+    freeRadiusZones: ['Cortland', 'Warren', 'Youngstown', 'Boardman', 'Canfield', 'Poland', 'Howland', 'Niles', 'Bazetta', 'Austintown', 'Hermitage'],
+  },
+  theme: {
+    googleFonts: ['Fjalla+One', 'Source+Sans+3:wght@400;600;700'],
+    mode: 'light',
+    display: { font: '"Fjalla One"', weight: 400, case: 'uppercase', color: '#FFFFFF' },
+    heading: { font: '"Fjalla One"', weight: 400, case: 'uppercase', color: '#0069ED' },
+    body: { font: '"Source Sans 3", "Source Sans Pro"' },
+    label: { font: '"Source Sans 3", "Source Sans Pro"', weight: 700, case: 'uppercase', tracking: '0.14em', color: '#303030' },
+    radius: 6,
+    colors: {
+      page: '#F6F6F6',
+      surface: '#FFFFFF',
+      surfaceAlt: '#EEF4FE',
+      text: '#1B1B1B',
+      muted: '#5E5E5E',
+      border: '#DADDE3',
+      brand: '#0069ED',
+      brandFg: '#FFFFFF',
+      accent: '#005DD4',
+    },
+    button: { bg: '#0069ED', fg: '#FFFFFF', radius: 48, case: 'uppercase', tracking: '0.14em', weight: 700, font: '"Source Sans 3", "Source Sans Pro"' },
+    hero: {
+      topBar: { bg: '#1B1B1B', fg: '#FFFFFF', items: ['Youngstown’s Residential & Commercial Power Washing service.'], align: 'center' },
+      nav: {
+        bg: '#0069ED',
+        fg: '#FFFFFF',
+        wordmark: 'Roof Juice Soft Washing',
+        action: { label: 'Call 330-240-0007', href: 'tel:3302400007', style: 'outline' },
+      },
+      layout: 'banner',
+      background: 'linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), linear-gradient(120deg, #6b4a2f 0%, #8a6a45 45%, #3f5e2c 100%)',
+      fg: '#FFFFFF',
+      align: 'left',
+      headline: 'Power Washing Professionals with Roof Cleaning',
+      highlight: '3 Year Guarantee!',
+      highlightColor: '#FFFFFF',
+      highlightOnNewLine: true,
+      sub: 'Serving Warren, Cortland, Youngstown & surrounding. Pick your service and a day for your estimate or wash.',
+      size: 'lg',
+      overlap: false,
+      box: 'rgba(0, 105, 237, 0.92)',
+    },
+  },
+} satisfies DemoEntry
